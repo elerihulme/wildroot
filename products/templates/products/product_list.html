@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Shop Plants</h1>
+
+    <!-- Dynamic Filter Bar -->
+    <div class="d-flex justify-content-center mb-4 flex-wrap">
+        {% for category in categories %}
+            <a href="{% url 'products' %}?category={{ category.name }}" class="btn btn-outline-success m-2">
+                {{ category.name }}
+            </a>
+        {% endfor %}
+        <a href="{% url 'products' %}?environment=indoor" class="btn btn-outline-primary m-2">Indoor</a>
+        <a href="{% url 'products' %}?environment=outdoor" class="btn btn-outline-primary m-2">Outdoor</a>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="row">
+        {% for plant in plants %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <a href="{% url 'product_detail' plant.pk %}">
+                    {% if plant.image %}
+                    <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.image_alt }}">
+                    {% endif %}
+                </a>
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{ plant.name }}</h5>
+                    {% if plant.botanical_name %}
+                        <p class="text-muted"><em>{{ plant.botanical_name }}</em></p>
+                    {% endif %}
+                    <p><strong>£{{ plant.price }}</strong></p>
+
+                    <div>
+                        {% if plant.pet_friendly %}<span class="badge bg-success">Pet Friendly</span>{% endif %}
+                        {% if plant.air_purifying %}<span class="badge bg-primary">Air Purifying</span>{% endif %}
+                        {% if plant.environment == 'indoor' %}<span class="badge bg-info text-dark">Indoor</span>{% endif %}
+                        {% if plant.environment == 'outdoor' %}<span class="badge bg-secondary">Outdoor</span>{% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
