@@ -3,18 +3,7 @@
 {% block content %}
 <div class="container mt-5">
     <h1 class="text-center mb-4">Shop Plants</h1>
-
-    <!-- Dynamic Filter Bar -->
-    <div class="d-flex justify-content-center mb-4 flex-wrap">
-        {% for category in categories %}
-            <a href="{% url 'products' %}?category={{ category.name }}" class="btn btn-outline-success m-2">
-                {{ category.name }}
-            </a>
-        {% endfor %}
-        <a href="{% url 'products' %}?environment=indoor" class="btn btn-outline-primary m-2">Indoor</a>
-        <a href="{% url 'products' %}?environment=outdoor" class="btn btn-outline-primary m-2">Outdoor</a>
-    </div>
-
+    
     <!-- Product Grid -->
     <div class="row">
         {% for plant in plants %}
