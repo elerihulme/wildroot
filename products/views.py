@@ -1,5 +1,5 @@
 from django.views.generic import ListView
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from .models import ShopPlant, PlantCategory
 
 class ProductList(ListView):
@@ -25,6 +25,3 @@ class ProductList(ListView):
         context['categories'] = PlantCategory.objects.all()
         return context
 
-def product_detail(request, pk):
-    plant = get_object_or_404(ShopPlant, pk=pk)
-    return render(request, 'products/product_detail.html', {'plant': plant})
