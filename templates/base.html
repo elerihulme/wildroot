@@ -31,11 +31,13 @@
                     Wild Root <i class="fa-solid fa-leaf"></i>
                 </a>
                 <ul class="nav-links">
-                    <li><a href="#">All Plants</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'products' %}">All Plants</a></li>
                     <li><a href="#">Indoor Plants</a></li>
                     <li><a href="#">Outdoor Plants</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="#">My Garden</a></li>
+                        <li><a href="#">Profile</a></li>
                         <li><a href="{% url 'account_logout' %}">Logout</a></li>
                     {% else %}
                         <li><a href="{% url 'account_login' %}">Login</a></li>
