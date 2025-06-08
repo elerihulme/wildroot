@@ -10,7 +10,7 @@
         {% for plant in plants %}
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <a href="#">
+                <a href="{% url 'product_detail' plant.pk %}">
                     {% if plant.image %}
                     <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.image_alt }}">
                     {% else %}

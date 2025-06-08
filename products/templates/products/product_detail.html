@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            {% if plant.image %}
+            <img src="{{ plant.image.url }}" class="img-fluid rounded" alt="{{ plant.image_alt }}">
+            {% else %}
+            <img src="{% static 'images/placeholder.png' %}" alt="No image available" class="img-fluid">
+            {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <h1>{{ plant.name }}</h1>
+            {% if plant.botanical_name %}
+            <h5 class="text-muted">{{ plant.botanical_name }}</h5>
+            {% endif %}
+            <p class="h4 mt-3">£{{ plant.price }}</p>
+
+            <p class="mt-4">{{ plant.description }}</p>
+
+            <ul class="list-unstyled mt-3">
+                <li><strong>Environment:</strong> {{ plant.get_environment_display }}</li>
+                <li class="list-group-item"><strong>Category:</strong> {{ plant.category.name }}</li>
+                <li class="list-group-item"><strong>Typical Light Requirements:</strong> {{ plant.category.get_typical_light_requirements_display }}</li>
+                <li class="list-group-item"><strong>Typical Watering Frequency:</strong> {{ plant.category.get_typical_watering_frequency_display }}</li>
+                <li class="list-group-item"><strong>Typical Caring Difficulty:</strong> {{ plant.category.get_typical_caring_difficulty_display }}</li>
+                {% if plant.pet_friendly %}
+                    <li><span class="badge bg-success">Pet Friendly</span></li>
+                {% endif %}
+                {% if plant.air_purifying %}
+                    <li><span class="badge bg-primary">Air Purifying</span></li>
+                {% endif %}
+            </ul>
+
+            <button class="btn btn-success mt-4">Add to Basket</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
