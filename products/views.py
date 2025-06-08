@@ -25,3 +25,6 @@ class ProductList(ListView):
         context['categories'] = PlantCategory.objects.all()
         return context
 
+def product_detail(request, pk):
+    plant = get_object_or_404(ShopPlant, pk=pk)
+    return render(request, 'products/product_detail.html', {'plant': plant})
