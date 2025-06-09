@@ -22,10 +22,15 @@ def bag_contents(request):
             'item_total': quantity * plant.price,
         })
 
+    delivery = Decimal('5.00')  # Flat rate for delivery
+    grand_total = total + delivery
+
     context = {
         'bag_items': bag_items,
         'total': total,
         'plant_count': plant_count,
+        'delivery': delivery,
+        'grand_total': grand_total,
     }
 
     return context
