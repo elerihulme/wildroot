@@ -1,0 +1,452 @@
+[
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 1,
+            "name": "Boston Fern",
+            "botanical_name": "Nephrolepis exaltata",
+            "description": "A lush fern perfect for shady indoor spaces.",
+            "price": "14.99",
+            "sku": "FERN001",
+            "environment": "indoor",
+            "pet_friendly": true,
+            "air_purifying": true,
+            "image_alt": "Boston Fern"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 1,
+            "name": "Staghorn Fern",
+            "botanical_name": "Platycerium bifurcatum",
+            "description": "Dramatic fern with antler-shaped fronds.",
+            "price": "19.99",
+            "sku": "FERN002",
+            "environment": "indoor",
+            "pet_friendly": true,
+            "air_purifying": true,
+            "image_alt": "Staghorn Fern"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 1,
+            "name": "Maidenhair Fern",
+            "botanical_name": "Adiantum",
+            "description": "Delicate fern with feathery, soft green leaves.",
+            "price": "16.99",
+            "sku": "FERN003",
+            "environment": "indoor",
+            "pet_friendly": true,
+            "air_purifying": true,
+            "image_alt": "Maidenhair Fern"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 2,
+            "name": "Aloe Vera",
+            "botanical_name": "Aloe barbadensis miller",
+            "description": "Succulent famous for its healing properties.",
+            "price": "7.99",
+            "sku": "SUCC001",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Aloe Vera Plant"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 2,
+            "name": "Echeveria Elegans",
+            "botanical_name": "Echeveria elegans",
+            "description": "Compact, rosette-shaped succulent with pale leaves.",
+            "price": "6.99",
+            "sku": "SUCC002",
+            "environment": "indoor",
+            "pet_friendly": true,
+            "air_purifying": false,
+            "image_alt": "Echeveria Plant"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 2,
+            "name": "Zebra Haworthia",
+            "botanical_name": "Haworthiopsis attenuata",
+            "description": "Striped, spiky succulent, easy to care for.",
+            "price": "5.99",
+            "sku": "SUCC003",
+            "environment": "indoor",
+            "pet_friendly": true,
+            "air_purifying": false,
+            "image_alt": "Zebra Haworthia Plant"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 2,
+            "name": "Jade Plant",
+            "botanical_name": "Crassula ovata",
+            "description": "Lucky indoor plant with thick green leaves.",
+            "price": "12.99",
+            "sku": "SUCC004",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Jade Plant"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 3,
+            "name": "Snake Plant",
+            "botanical_name": "Sansevieria trifasciata",
+            "description": "Low-maintenance, tall-leaved plant for any room.",
+            "price": "12.99",
+            "sku": "SNAKE01",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Snake Plant"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 3,
+            "name": "Sansevieria Moonshine",
+            "botanical_name": "Sansevieria trifasciata Moonshine",
+            "description": "Rare silver-toned variety of the Snake Plant.",
+            "price": "15.99",
+            "sku": "SNAKE02",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Moonshine Snake Plant"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 3,
+            "name": "Sansevieria Laurentii",
+            "botanical_name": "Sansevieria trifasciata Laurentii",
+            "description": "Variegated snake plant with yellow edges.",
+            "price": "14.99",
+            "sku": "SNAKE03",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Sansevieria Laurentii"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 4,
+            "name": "Golden Barrel Cactus",
+            "botanical_name": "Echinocactus grusonii",
+            "description": "Spiky round cactus great for sunny spots.",
+            "price": "10.99",
+            "sku": "CACT001",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": false,
+            "image_alt": "Golden Barrel Cactus"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 4,
+            "name": "Bunny Ear Cactus",
+            "botanical_name": "Opuntia microdasys",
+            "description": "Cute cactus with small round pads.",
+            "price": "9.99",
+            "sku": "CACT002",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": false,
+            "image_alt": "Bunny Ear Cactus"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 4,
+            "name": "Christmas Cactus",
+            "botanical_name": "Schlumbergera",
+            "description": "Winter-blooming cactus with pink flowers.",
+            "price": "11.99",
+            "sku": "CACT003",
+            "environment": "indoor",
+            "pet_friendly": true,
+            "air_purifying": true,
+            "image_alt": "Christmas Cactus"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 5,
+            "name": "Monstera Deliciosa",
+            "botanical_name": "Monstera deliciosa",
+            "description": "Large, iconic split-leaf plant.",
+            "price": "24.99",
+            "sku": "MONS001",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Monstera Deliciosa Plant"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 5,
+            "name": "Monstera Adansonii",
+            "botanical_name": "Monstera adansonii",
+            "description": "Swiss cheese plant with perforated leaves.",
+            "price": "19.99",
+            "sku": "MONS002",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Monstera Adansonii Plant"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 5,
+            "name": "Monstera Peru",
+            "botanical_name": "Monstera karstenianum",
+            "description": "Rare monstera with thick, textured leaves.",
+            "price": "29.99",
+            "sku": "MONS003",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Monstera Peru"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 6,
+            "name": "Olive Tree",
+            "botanical_name": "Olea europaea",
+            "description": "Elegant indoor or patio tree with silvery leaves.",
+            "price": "39.99",
+            "sku": "TREE001",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": false,
+            "image_alt": "Olive Tree"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 6,
+            "name": "Fiddle Leaf Fig",
+            "botanical_name": "Ficus lyrata",
+            "description": "Large, lush leaves great for bright rooms.",
+            "price": "49.99",
+            "sku": "TREE002",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Fiddle Leaf Fig"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 6,
+            "name": "Weeping Fig",
+            "botanical_name": "Ficus benjamina",
+            "description": "A graceful tree with drooping branches and shiny leaves.",
+            "price": "29.99",
+            "sku": "TREE003",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Weeping Fig"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 7,
+            "name": "Boxwood",
+            "botanical_name": "Buxus",
+            "description": "Classic evergreen shrub perfect for shaping.",
+            "price": "29.99",
+            "sku": "EVER001",
+            "environment": "outdoor",
+            "pet_friendly": false,
+            "air_purifying": false,
+            "image_alt": "Boxwood Shrub"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 7,
+            "name": "Juniper",
+            "botanical_name": "Juniperus",
+            "description": "Evergreen with blueish foliage, good for hedging.",
+            "price": "34.99",
+            "sku": "EVER002",
+            "environment": "outdoor",
+            "pet_friendly": false,
+            "air_purifying": false,
+            "image_alt": "Juniper Shrub"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 7,
+            "name": "Cypress",
+            "botanical_name": "Cupressus",
+            "description": "Tall, narrow evergreen good for screens and fences.",
+            "price": "44.99",
+            "sku": "EVER003",
+            "environment": "outdoor",
+            "pet_friendly": false,
+            "air_purifying": false,
+            "image_alt": "Cypress Tree"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 8,
+            "name": "English Ivy",
+            "botanical_name": "Hedera helix",
+            "description": "Fast-growing climber, perfect for green walls.",
+            "price": "14.99",
+            "sku": "CLIM001",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "English Ivy"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 8,
+            "name": "Jasmine",
+            "botanical_name": "Jasminum",
+            "description": "Fragrant climber with white flowers.",
+            "price": "18.99",
+            "sku": "CLIM002",
+            "environment": "outdoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Jasmine Plant"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 8,
+            "name": "Clematis",
+            "botanical_name": "Clematis vitalba",
+            "description": "Flowering vine with vibrant blooms.",
+            "price": "19.99",
+            "sku": "CLIM003",
+            "environment": "outdoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Clematis Vine"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 9,
+            "name": "Peace Lily",
+            "botanical_name": "Spathiphyllum",
+            "description": "Low-light flowering plant with white spathes.",
+            "price": "12.99",
+            "sku": "FLOW001",
+            "environment": "indoor",
+            "pet_friendly": false,
+            "air_purifying": true,
+            "image_alt": "Peace Lily"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 9,
+            "name": "Lavender",
+            "botanical_name": "Lavandula",
+            "description": "Fragrant purple flowers, attracts pollinators.",
+            "price": "8.99",
+            "sku": "FLOW002",
+            "environment": "outdoor",
+            "pet_friendly": true,
+            "air_purifying": false,
+            "image_alt": "Lavender Plant"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 9,
+            "name": "Begonia",
+            "botanical_name": "Begonia semperflorens",
+            "description": "Colorful blooming plant, perfect for summer gardens.",
+            "price": "9.99",
+            "sku": "FLOW003",
+            "environment": "outdoor",
+            "pet_friendly": false,
+            "air_purifying": false,
+            "image_alt": "Begonia Plant"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 9,
+            "name": "Rose Bush",
+            "botanical_name": "Rosa",
+            "description": "Classic garden favorite with beautiful blooms.",
+            "price": "15.99",
+            "sku": "FLOW004",
+            "environment": "outdoor",
+            "pet_friendly": false,
+            "air_purifying": false,
+            "image_alt": "Rose Bush"
+        }
+    },
+    {
+        "model": "products.shopplant",
+        "fields": {
+            "category": 9,
+            "name": "Hibiscus",
+            "botanical_name": "Hibiscus rosa-sinensis",
+            "description": "Tropical plant with large, colorful flowers.",
+            "price": "19.99",
+            "sku": "FLOW005",
+            "environment": "outdoor",
+            "pet_friendly": false,
+            "air_purifying": false,
+            "image_alt": "Hibiscus Plant"
+        }
+    }
+]

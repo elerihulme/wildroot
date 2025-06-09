@@ -1,0 +1,101 @@
+[
+    {
+        "model": "products.plantcategory",
+        "pk": 1,
+        "fields": {
+            "name": "Ferns",
+            "description": "Shade-loving plants perfect for indoor settings.",
+            "typical_light_requirements": "low",
+            "typical_watering_frequency": "medium",
+            "typical_caring_difficulty": "easy"
+        }
+    },
+    {
+        "model": "products.plantcategory",
+        "pk": 2,
+        "fields": {
+            "name": "Succulents",
+            "description": "Low-maintenance plants that store water in their leaves.",
+            "typical_light_requirements": "high",
+            "typical_watering_frequency": "low",
+            "typical_caring_difficulty": "easy"
+        }
+    },
+    {
+        "model": "products.plantcategory",
+        "pk": 3,
+        "fields": {
+            "name": "Snake Plants",
+            "description": "Tolerant plants that thrive on neglect and low light.",
+            "typical_light_requirements": "low",
+            "typical_watering_frequency": "low",
+            "typical_caring_difficulty": "easy"
+        }
+    },
+    {
+        "model": "products.plantcategory",
+        "pk": 4,
+        "fields": {
+            "name": "Cacti",
+            "description": "Desert plants that love sunlight and minimal water.",
+            "typical_light_requirements": "high",
+            "typical_watering_frequency": "low",
+            "typical_caring_difficulty": "easy"
+        }
+    },
+    {
+        "model": "products.plantcategory",
+        "pk": 5,
+        "fields": {
+            "name": "Monstera",
+            "description": "Tropical plants famous for their split leaves.",
+            "typical_light_requirements": "medium",
+            "typical_watering_frequency": "medium",
+            "typical_caring_difficulty": "medium"
+        }
+    },
+    {
+        "model": "products.plantcategory",
+        "pk": 6,
+        "fields": {
+            "name": "Trees",
+            "description": "Trees to make a bold, green statement.",
+            "typical_light_requirements": "high",
+            "typical_watering_frequency": "high",
+            "typical_caring_difficulty": "hard"
+        }
+    },
+    {
+        "model": "products.plantcategory",
+        "pk": 7,
+        "fields": {
+            "name": "Evergreens",
+            "description": "Year-round greenery perfect for outdoor landscapes.",
+            "typical_light_requirements": "medium",
+            "typical_watering_frequency": "medium",
+            "typical_caring_difficulty": "medium"
+        }
+    },
+    {
+        "model": "products.plantcategory",
+        "pk": 8,
+        "fields": {
+            "name": "Climbers",
+            "description": "Plants that love to grow up trellises or walls.",
+            "typical_light_requirements": "medium",
+            "typical_watering_frequency": "medium",
+            "typical_caring_difficulty": "medium"
+        }
+    },
+    {
+        "model": "products.plantcategory",
+        "pk": 9,
+        "fields": {
+            "name": "Flowers",
+            "description": "Blooming plants adding color and fragrance.",
+            "typical_light_requirements": "high",
+            "typical_watering_frequency": "high",
+            "typical_caring_difficulty": "medium"
+        }
+    }
+]
