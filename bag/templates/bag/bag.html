@@ -4,6 +4,31 @@
 {% block content %}
 <div class="container mt-5">
     <h1>Shopping Bag</h1>
-    <p>Your bag is currently empty.</p>
+
+    {% if bag_items %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Item Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in bag_items %}
+            <tr>
+                <td>{{ item.plant.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>£{{ item.plant.price }}</td>
+                <td>£{{ item.item_total }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h3 class="text-end">Total: £{{ total }}</h3>
+    {% else %}
+    <p>Your bag is empty.</p>
+    {% endif %}
 </div>
 {% endblock %}

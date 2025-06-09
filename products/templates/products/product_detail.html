@@ -35,7 +35,15 @@
                 {% endif %}
             </ul>
 
-            <button class="btn btn-success mt-4">Add to Basket</button>
+            <form class="form" action="{% url 'add_to_bag' plant.id %}" method="POST">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" name="quantity" value="1" min="1" class="form-control" required>
+                </div>
+                <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                <button type="submit" class="btn btn-success mt-3">Add to Basket</button>
+            </form>
         </div>
     </div>
 </div>
