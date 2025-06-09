@@ -23,3 +23,18 @@ def add_to_bag(request, item_id):
 
     request.session['bag'] = bag
     return redirect(redirect_url)
+
+def adjust_bag(request, item_id):
+    """
+    Adjust the quantity of the specified plant to the specified amount
+    """
+    quantity = int(request.POST.get('quantity'))
+    bag = request.session.get('bag', {})
+
+    if quantity > 0:
+        bag[item_id] = quantity
+    else:
+        bag.pop(item_id)
+
+    request.session['bag'] = bag
+    return redirect('view_bag')

@@ -19,7 +19,13 @@
             {% for item in bag_items %}
             <tr>
                 <td>{{ item.plant.name }}</td>
-                <td>{{ item.quantity }}</td>
+                <td>
+                    <form action="{% url 'adjust_bag' item.item_id %}" method="POST" class="d-flex">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm w-50">
+                        <button type="submit" class="btn btn-sm btn-outline-primary ms-2">Update</button>
+                    </form>
+                </td>
                 <td>£{{ item.plant.price }}</td>
                 <td>£{{ item.item_total }}</td>
             </tr>
