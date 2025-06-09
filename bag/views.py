@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.http import JsonResponse
+from django.contrib import messages
 from products.models import ShopPlant
 
 def view_bag(request):
@@ -37,4 +39,19 @@ def adjust_bag(request, item_id):
         bag.pop(item_id)
 
     request.session['bag'] = bag
-    return redirect('view_bag')
+    return redirect(reverse('view_bag'))
+
+def remove_from_bag(request, item_id):
+    """
+    Remove the item from the shopping bag
+    """
+    try:
+        plant = get_object_or_404(ShopPlant, pk=item_id)
+        bag = request.session.get('bag', {})
+
+        bag.pop(item_id)
+        request.session['bag'] = bag
+
+        return JsonResponse({'success': True})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

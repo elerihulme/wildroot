@@ -28,6 +28,9 @@
                 </td>
                 <td>£{{ item.plant.price }}</td>
                 <td>£{{ item.item_total }}</td>
+                <td>
+                    <button class="btn btn-sm btn-danger" onclick="removeFromBag('{{ item.item_id }}')">Remove</button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
@@ -37,4 +40,24 @@
     <p>Your bag is empty.</p>
     {% endif %}
 </div>
+
+<script>
+    function removeFromBag(itemId) {
+        const csrfToken = '{{ csrf_token }}';
+
+        fetch(`/bag/remove/${itemId}/`, {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': csrfToken,
+            },
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.reload();
+            } else {
+                alert('Failed to remove item. Please try again.');
+            }
+        });
+    }
+</script>
 {% endblock %}
