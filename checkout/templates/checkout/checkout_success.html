@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Thank you for your purchase!</h2>
+    <p class="text-center">Order: <strong>{{ order.order_number }}</strong></p>
+    <p class="text-center">An email confirmation has been sent to: <strong>{{ order.email }}</strong></p>
+
+    <hr>
+
+    <h4>Order Info</h4>
+    <ul class="list-group mb-4">
+        <li class="list-group-item"><strong>Order Number:</strong> {{ order.order_number }}</li>
+        <li class="list-group-item"><strong>Order Date:</strong> {{ order.date|date:"d/m/Y" }}</li>
+    </ul>
+
+    <h4>Order Details</h4>
+    <ul class="list-group mb-4">
+        {% for item in order.lineitems.all %}
+        <li class="list-group-item d-flex justify-content-between">
+            {{ item.quantity }} x {{ item.plant.name }}
+            <span>£{{ item.lineitem_total }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h4>Delivery Address</h4>
+    <ul class="list-group mb-4">
+        <li class="list-group-item">{{ order.full_name }}</li>
+        <li class="list-group-item">{{ order.street_address1 }}</li>
+        {% if order.street_address2 %}
+        <li class="list-group-item">{{ order.street_address2 }}</li>
+        {% endif %}
+        <li class="list-group-item">{{ order.town_or_city }}</li>
+        <li class="list-group-item">{{ order.postcode }}</li>
+        <li class="list-group-item">{{ order.country }}</li>
+    </ul>
+
+    <h4>Billing Summary</h4>
+    <ul class="list-group mb-4">
+        <li class="list-group-item d-flex justify-content-between">
+            Subtotal: <span>£{{ order.order_total }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            Delivery: <span>£{{ order.delivery_cost }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            Total: <strong>£{{ order.grand_total }}</strong>
+        </li>
+    </ul>
+
+    <div class="text-center">
+        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>
+{% endblock %}
