@@ -36,28 +36,14 @@
         </tbody>
     </table>
     <h3 class="text-end">Total: £{{ total }}</h3>
+    <div class="text-end mt-4">
+        <a href="{% url 'checkout' %}" class="btn btn-success btn-lg">
+            Proceed to Checkout
+        </a>
+    </div>
     {% else %}
     <p>Your bag is empty.</p>
     {% endif %}
 </div>
 
-<script>
-    function removeFromBag(itemId) {
-        const csrfToken = '{{ csrf_token }}';
-
-        fetch(`/bag/remove/${itemId}/`, {
-            method: 'POST',
-            headers: {
-                'X-CSRFToken': csrfToken,
-            },
-        })
-        .then(response => {
-            if (response.ok) {
-                window.location.reload();
-            } else {
-                alert('Failed to remove item. Please try again.');
-            }
-        });
-    }
-</script>
 {% endblock %}

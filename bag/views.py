@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.http import JsonResponse
+from django.http import HttpResponse
 from django.contrib import messages
 from products.models import ShopPlant
 
@@ -52,6 +52,6 @@ def remove_from_bag(request, item_id):
         bag.pop(item_id)
         request.session['bag'] = bag
 
-        return JsonResponse({'success': True})
+        return HttpResponse(status=200)
     except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
+        return HttpResponse(content=e, status=400)
