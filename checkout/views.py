@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.conf import settings
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from bag.contexts import bag_contents
 from .forms import OrderForm
 from .models import Order, OrderItem
@@ -10,7 +10,6 @@ from products.models import ShopPlant
 import stripe
 import json
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
 
 @require_POST
 def cache_checkout_data(request):
@@ -75,7 +74,8 @@ def checkout(request):
 
         current_bag = bag_contents(request)
         total = current_bag['grand_total']
-        stripe_total = round(total * 100)  
+        stripe_total = round(total * 100)
+        stripe.api_key = settings.STRIPE_SECRET_KEY  
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency='gbp',

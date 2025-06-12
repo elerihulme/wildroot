@@ -40,6 +40,8 @@
                 <h4 class="mt-4">Payment</h4>
                 <div id="card-element" class="mb-3"></div>
                 <div id="card-errors" class="text-danger mb-3" role="alert"></div>
+                <input type="hidden" name="client_secret" id="client_secret_input">
+
 
                 <button type="submit" class="btn btn-success btn-block w-100">Pay Now</button>
             </form>
@@ -47,5 +49,11 @@
     </div>
 </div>
 
-<script src="{% static 'js/stripe.js' %}"></script>
+{% endblock %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'js/stripe.js' %}"></script>
 {% endblock %}
