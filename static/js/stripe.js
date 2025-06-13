@@ -1,6 +1,6 @@
 var stripe_public_key = $("#id_stripe_public_key").text().slice(1, -1);
-var client_secret = $("#id_client_secret").text().slice(1, -1);
-document.getElementById("client_secret_input").value = client_secret;
+var clientSecret = $("#id_client_secret").text().slice(1, -1);
+document.getElementById("client_secret_input").value = clientSecret;
 var stripe = Stripe(stripe_public_key);
 var elements = stripe.elements();
 var style = {
@@ -72,7 +72,7 @@ form.addEventListener("submit", function (ev) {
                                 line2: $.trim(form.street_address2.value),
                                 city: $.trim(form.town_or_city.value),
                                 country: $.trim(form.country.value),
-                                state: $.trim(form.county.value),
+                                postal_code: $.trim(form.postcode.value),
                             },
                         },
                     },
@@ -85,7 +85,7 @@ form.addEventListener("submit", function (ev) {
                             city: $.trim(form.town_or_city.value),
                             country: $.trim(form.country.value),
                             postal_code: $.trim(form.postcode.value),
-                            state: $.trim(form.county.value),
+                            state: null, // UK doesn’t need this
                         },
                     },
                 })

@@ -12,7 +12,7 @@ uk_postcode_validator = RegexValidator(
 
 # Country choices
 COUNTRY_CHOICES = [
-    ('United Kingdom', 'United Kingdom'),
+    ('GB', 'United Kingdom'),
 ]
 
 class Order(models.Model):
@@ -33,7 +33,7 @@ class Order(models.Model):
     country = models.CharField(
         max_length=40,
         choices=COUNTRY_CHOICES,
-        default='United Kingdom',
+        default='GB',
         null=False,
         blank=False
     )

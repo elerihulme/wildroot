@@ -20,9 +20,9 @@ class OrderForm(forms.ModelForm):
 
         # Set country to UK only
         self.fields['country'].choices = [
-            ('United Kingdom', 'United Kingdom')
+            ('GB', 'United Kingdom')
         ]
-        self.fields['country'].initial = 'United Kingdom'
+        self.fields['country'].initial = 'GB'
 
         # Add Bootstrap classes for styling
         for field_name, field in self.fields.items():
