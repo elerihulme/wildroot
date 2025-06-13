@@ -48,6 +48,12 @@ class Order(models.Model):
         Generate a random, unique order number using UUID
         """
         return uuid.uuid4().hex.upper()
+    
+    def update_total(self):
+    self.order_total = sum(item.plant.price * item.quantity for item in self.lineitems.all())
+    self.delivery_cost = 5
+    self.grand_total = self.order_total + self.delivery_cost
+    self.save()
 
     def save(self, *args, **kwargs):
         """

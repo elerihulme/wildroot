@@ -1,12 +1,15 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.conf import settings
+from django.shortcuts import (
+    render, redirect, reverse, get_object_or_404, HttpResponse
+)
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-from django.http import JsonResponse, HttpResponse
-from bag.contexts import bag_contents
+from django.conf import settings
+
 from .forms import OrderForm
 from .models import Order, OrderItem
 from products.models import ShopPlant
+from bag.contexts import bag_contents
+
 import stripe
 import json
 
@@ -15,14 +18,17 @@ import json
 def cache_checkout_data(request):
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
-        request.session['save_info'] = request.POST.get('save_info')
+        stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'bag': json.dumps(request.session.get('bag', {})),
+            'save_info': request.POST.get('save_info'),
             'username': request.user.username,
         })
         return HttpResponse(status=200)
     except Exception as e:
+        messages.error(request, 'Sorry, your payment cannot be processed right now. Please try again later.')
         return HttpResponse(content=e, status=400)
+
 
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -30,6 +36,7 @@ def checkout(request):
     bag = request.session.get('bag', {})
 
     if not bag:
+        messages.error(request, "There's nothing in your bag at the moment.")
         return redirect(reverse('products'))
 
     current_bag = bag_contents(request)
@@ -47,11 +54,11 @@ def checkout(request):
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
             'phone_number': request.POST['phone_number'],
+            'country': request.POST['country'],
+            'postcode': request.POST['postcode'],
+            'town_or_city': request.POST['town_or_city'],
             'street_address1': request.POST['street_address1'],
             'street_address2': request.POST['street_address2'],
-            'town_or_city': request.POST['town_or_city'],
-            'postcode': request.POST['postcode'],
-            'country': request.POST['country'],
         }
 
         order_form = OrderForm(form_data)
@@ -59,9 +66,7 @@ def checkout(request):
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
-            order.order_total = 0
-            order.delivery_cost = 0
-            order.grand_total = 0
+            order.original_bag = json.dumps(bag)
             order.save()
 
             for item_id, quantity in bag.items():
@@ -75,8 +80,7 @@ def checkout(request):
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
-            messages.error(request, "There was an error with your form. Please check your information.")
-
+            messages.error(request, 'There was an error with your form. Please check your information.')
     else:
         order_form = OrderForm()
 
@@ -89,19 +93,21 @@ def checkout(request):
     return render(request, 'checkout/checkout.html', context)
 
 
-
 def checkout_success(request, order_number):
     """
     Handle successful checkouts
     """
     order = get_object_or_404(Order, order_number=order_number)
 
+    messages.success(request, f'Order successfully processed! \
+        Your order number is {order_number}. A confirmation email \
+        will be sent to {order.email}.')
+
     if 'bag' in request.session:
         del request.session['bag']
 
-    template = 'checkout/checkout_success.html'
     context = {
         'order': order,
     }
 
-    return render(request, template, context)
+    return render(request, 'checkout/checkout_success.html', context)

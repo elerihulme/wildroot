@@ -20,7 +20,7 @@
         {% for item in order.items.all %}
         <li class="list-group-item d-flex justify-content-between">
             {{ item.quantity }} x {{ item.plant.name }}
-            <span>£{{ item.total }}</span>
+            <span>£{{ item.item_total }}</span>
         </li>
         {% endfor %}
     </ul>
