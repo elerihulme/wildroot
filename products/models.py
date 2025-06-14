@@ -1,4 +1,5 @@
 from django.db import models
+from django.templatetags.static import static
 
 
 class PlantCategory(models.Model):
@@ -56,6 +57,12 @@ class ShopPlant(models.Model):
         max_length=10, choices=ENVIRONMENTS, default='indoor')
     pet_friendly = models.BooleanField(default=False)
     air_purifying = models.BooleanField(default=False)
+
+
+    def get_image_url(self):
+        if self.image:
+            return self.image.url
+        return static('images/placeholder.png')
 
     def __str__(self):
         return self.name

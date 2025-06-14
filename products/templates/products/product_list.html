@@ -13,11 +13,7 @@
         <div class="col-md-4 mb-4">
             <div class="card h-100">
                 <a href="{% url 'product_detail' plant.pk %}">
-                    {% if plant.image %}
-                    <img src="{{ plant.image.url }}" class="card-img-top" alt="{{ plant.image_alt }}">
-                    {% else %}
-                    <img src="{% static 'images/placeholder.png' %}" alt="No image available" class="img-fluid">
-                    {% endif %}
+                    <img src="{{ plant.get_image_url }}" class="card-img-top" alt="{{ plant.image_alt|default:'No image available' }}">
                 </a>
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ plant.name }}</h5>
