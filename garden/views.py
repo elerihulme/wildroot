@@ -42,8 +42,7 @@ def edit_plant(request, plant_id):
         form = UserPlantForm(request.POST, instance=plant)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Plant updated successfully.')
-            return redirect('plant_detail', plant_id=plant.id)
+            return redirect('plant_detail', pk=plant.id)
     else:
         form = UserPlantForm(instance=plant)
 
@@ -54,3 +53,12 @@ def edit_plant(request, plant_id):
     }
     return render(request, 'garden/add_plant.html', context)
 
+@login_required
+def delete_plant(request, plant_id):
+    plant = get_object_or_404(UserPlant, id=plant_id, user=request.user)
+    if request.method == 'POST':
+        plant.delete()
+        return redirect('garden')
+    
+    # Optional: add a confirmation step here if you want
+    return redirect('plant_detail', plant_id=plant_id)
