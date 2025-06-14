@@ -48,7 +48,7 @@
                     <li><a href="#">Outdoor Plants</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="#">My Garden</a></li>
-                        <li><a href="#">Profile</a></li>
+                        <li><a href="{% url 'profile' %}">Profile</a></li>
                         <li><a href="{% url 'account_logout' %}">Logout</a></li>
                     {% else %}
                         <li><a href="{% url 'account_login' %}">Login</a></li>
