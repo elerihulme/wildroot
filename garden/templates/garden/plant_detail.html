@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}| {{ plant.nickname }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ plant.nickname }} <small class="text-muted">({{ plant.plant_species }})</small></h2>
+    <p><strong>Date Added:</strong> {{ plant.date_added|date:"F j, Y" }}</p>
+    {% if plant.last_watered %}
+        <p><strong>Last Watered:</strong> {{ plant.last_watered|date:"F j, Y" }}</p>
+    {% endif %}
+    {% if plant.notes %}
+        <p><strong>Notes:</strong> {{ plant.notes }}</p>
+    {% endif %}
+
+    {% if photos %}
+        <div id="plantCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                {% for photo in photos %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ photo.image.url }}" class="d-block w-100" alt="{{ photo.image_alt }}">
+                        {% if photo.caption %}
+                            <div class="carousel-caption d-none d-md-block">
+                                <p>{{ photo.caption }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#plantCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#plantCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    {% else %}
+        <p>No photos yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -15,13 +15,13 @@
         {% for plant in user_plants %}
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <a href="#">
+                <a href="{% url 'plant_detail' plant.id %}">
                     <img src="{{ plant.get_latest_image_url }}" class="card-img-top" alt="{{ plant.nickname }}">
                 </a>
                 <div class="card-body text-center">
                     <h5 class="card-title">{{ plant.nickname }}</h5>
                     <p class="text-muted">{{ plant.plant_species }}</p>
-                    <a href="#" class="btn btn-outline-success">View</a>
+                    <a href="{% url 'plant_detail' plant.id %}" class="btn btn-outline-success">View</a>
                 </div>
             </div>
         </div>

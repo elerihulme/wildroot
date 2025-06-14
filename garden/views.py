@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import UserPlant
 from .forms import UserPlantForm
@@ -10,6 +10,15 @@ def garden_list(request):
         'user_plants': user_plants,
     }
     return render(request, 'garden/garden_list.html', context)
+
+@login_required
+def plant_detail(request, pk):
+    plant = get_object_or_404(UserPlant, pk=pk, user=request.user)
+    photos = plant.get_all_photos()
+    return render(request, 'garden/plant_detail.html', {
+        'plant': plant,
+        'photos': photos
+    })
 
 @login_required
 def add_plant(request):
