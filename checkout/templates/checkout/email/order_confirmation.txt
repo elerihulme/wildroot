@@ -1,0 +1,25 @@
+Hi {{ order.full_name }},
+
+Thank you for your order from Wild Root!
+
+Order number: {{ order.order_number }}
+Order date: {{ order.date|date:"d/m/Y" }}
+
+Items:
+{% for item in order.items.all %}
+  - {{ item.plant.name }} x{{ item.quantity }} – £{{ item.item_total }}
+{% endfor %}
+
+Subtotal: £{{ order.order_total }}
+Delivery: £{{ order.delivery_cost }}
+Total: £{{ order.grand_total }}
+
+Shipping address:
+{{ order.full_name }}
+{{ order.street_address1 }}
+{% if order.street_address2 %}{{ order.street_address2 }}{% endif %}
+{{ order.town_or_city }}
+{{ order.postcode }}
+{{ order.country }}
+
+Wild Root

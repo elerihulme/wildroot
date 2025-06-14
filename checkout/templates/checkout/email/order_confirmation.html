@@ -1,0 +1,27 @@
+<h2>Thanks for your purchase!</h2>
+<p>Hi {{ order.full_name }},</p>
+<p>Your order <strong>{{ order.order_number }}</strong>
+placed on {{ order.date|date:"d/m/Y" }} has been received.</p>
+
+<h3>Order details</h3>
+<ul>
+{% for item in order.items.all %}
+  <li>{{ item.quantity }} × {{ item.plant.name }} – £{{ item.item_total }}</li>
+{% endfor %}
+</ul>
+
+<p>Subtotal: £{{ order.order_total }}<br>
+Delivery: £{{ order.delivery_cost }}<br>
+<strong>Total: £{{ order.grand_total }}</strong></p>
+
+<h3>Delivery address</h3>
+<p>
+  {{ order.full_name }}<br>
+  {{ order.street_address1 }}<br>
+  {% if order.street_address2 %}{{ order.street_address2 }}<br>{% endif %}
+  {{ order.town_or_city }}<br>
+  {{ order.postcode }}<br>
+  {{ order.country }}
+</p>
+
+<p>Thanks,<br>Wild Root</p>

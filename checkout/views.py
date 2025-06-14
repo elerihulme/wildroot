@@ -4,6 +4,8 @@ from django.shortcuts import (
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
+from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
 
 from .forms import OrderForm
 from .models import Order, OrderItem
@@ -142,6 +144,21 @@ def checkout_success(request, order_number):
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation email \
         will be sent to {order.email}.')
+    
+    subject = f"Order Confirmation – {order.order_number}"
+    from_email = settings.DEFAULT_FROM_EMAIL
+    to_email = [order.email]
+
+    text_body = render_to_string(
+        "checkout/email/order_confirmation.txt", {"order": order}
+    )
+    html_body = render_to_string(
+        "checkout/email/order_confirmation.html", {"order": order}
+    )
+
+    email = EmailMultiAlternatives(subject, text_body, from_email, to_email)
+    email.attach_alternative(html_body, "text/html")
+    email.send()
 
     if 'bag' in request.session:
         del request.session['bag']
