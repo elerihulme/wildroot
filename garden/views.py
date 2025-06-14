@@ -34,3 +34,23 @@ def add_plant(request):
     
     return render(request, 'garden/add_plant.html', {'form': form})
 
+@login_required
+def edit_plant(request, plant_id):
+    plant = get_object_or_404(UserPlant, id=plant_id, user=request.user)
+
+    if request.method == 'POST':
+        form = UserPlantForm(request.POST, instance=plant)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Plant updated successfully.')
+            return redirect('plant_detail', plant_id=plant.id)
+    else:
+        form = UserPlantForm(instance=plant)
+
+    context = {
+        'form': form,
+        'editing': True,
+        'plant': plant,
+    }
+    return render(request, 'garden/add_plant.html', context)
+

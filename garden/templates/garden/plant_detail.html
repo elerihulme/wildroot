@@ -13,6 +13,7 @@
     {% if plant.notes %}
         <p><strong>Notes:</strong> {{ plant.notes }}</p>
     {% endif %}
+    <a href="{% url 'edit_plant' plant.id %}" class="btn btn-warning">Edit Plant</a>
 
     {% if photos %}
         <div id="plantCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
