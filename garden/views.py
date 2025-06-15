@@ -5,7 +5,7 @@ from .forms import UserPlantForm, UserPlantPhotoForm
 
 @login_required
 def garden_list(request):
-    user_plants = UserPlant.objects.filter(user=request.user).order_by('-date_added')
+    user_plants = UserPlant.objects.filter(user=request.user).prefetch_related('photos').order_by('-date_added')
     context = {
         'user_plants': user_plants,
     }
@@ -23,7 +23,7 @@ def plant_detail(request, pk):
 @login_required
 def add_plant(request):
     if request.method == 'POST':
-        form = UserPlantForm(request.POST)
+        form = UserPlantForm(request.POST, request.FILES)
         if form.is_valid():
             user_plant = form.save(commit=False)
             user_plant.user = request.user
@@ -80,7 +80,7 @@ def delete_photo(request, photo_id):
     photo = get_object_or_404(UserPlantPhoto, id=photo_id, user_plant__user=request.user)
     plant_id = photo.user_plant.id
     photo.delete()
-    return redirect('edit_plant', plant_id=plant_id)
+    return redirect('edit_plant', pk=plant_id)
 
 @login_required
 def delete_plant(request, plant_id):
@@ -90,4 +90,4 @@ def delete_plant(request, plant_id):
         return redirect('garden')
     
     # Optional: add a confirmation step here if you want
-    return redirect('plant_detail', plant_id=plant_id)
+    return redirect('plant_detail', pk=plant_id)
