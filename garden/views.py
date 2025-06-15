@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .models import UserPlant, UserPlantPhoto
 from .forms import UserPlantForm, UserPlantPhotoForm
 
@@ -76,6 +77,7 @@ def edit_plant(request, plant_id):
     })
 
 @login_required
+@require_POST
 def delete_photo(request, photo_id):
     photo = get_object_or_404(UserPlantPhoto, id=photo_id, user_plant__user=request.user)
     plant_id = photo.user_plant.id
@@ -83,6 +85,7 @@ def delete_photo(request, photo_id):
     return redirect('edit_plant', pk=plant_id)
 
 @login_required
+@require_POST
 def delete_plant(request, plant_id):
     plant = get_object_or_404(UserPlant, id=plant_id, user=request.user)
     if request.method == 'POST':

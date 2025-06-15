@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}| Page Not Found{% endblock %}
+
+{% block content %}
+<div class="container text-center mt-5">
+    <h1 class="display-4">404 - Lost in the Jungle</h1>
+    <p class="lead">Oops! Looks like you took a wrong turn and got lost in the greenery.</p>
+    <a href="{% url 'home' %}" class="btn btn-outline-success">Go Back Home</a>
+</div>
+{% endblock %}

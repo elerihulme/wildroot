@@ -44,8 +44,8 @@
                 <ul class="nav-links">
                     <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'products' %}">All Plants</a></li>
-                    <li><a href="#">Indoor Plants</a></li>
-                    <li><a href="#">Outdoor Plants</a></li>
+                    <li><a href="{% url 'products' %}?environment=indoor">Indoor Plants</a></li>
+                    <li><a href="{% url 'products' %}?environment=outdoor">Outdoor Plants</a></li>
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'garden' %}">My Garden</a></li>
                         <li><a href="{% url 'profile' %}">Profile</a></li>
