@@ -7,7 +7,7 @@
 <section class="hero">
     <h1>Grow Wild. Stay Rooted.</h1>
     <p>Curated indoor and outdoor plants for every home</p>
-    <a href="#" class="btn">Shop Now</a>
+    <a href="{% url 'products' %}" class="btn">Shop Now</a>
 </section>
 
 <section class="mission">
@@ -27,8 +27,8 @@
 <section class="browse-categories">
     <h2>Browse Categories</h2>
     <div class="categories">
-        <a href="#" class="category-card">Indoor Plants</a>
-        <a href="#" class="category-card">Outdoor Plants</a>
+        <a href="{% url 'products' %}?environment=indoor" class="category-card">Indoor Plants</a>
+        <a href="{% url 'products' %}?environment=outdoor" class="category-card">Outdoor Plants</a>
     </div>
 </section>
 {% endblock %}

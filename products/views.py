@@ -12,6 +12,7 @@ class ProductList(ListView):
         queryset = super().get_queryset()
 
         # Filters
+        environment = self.request.GET.get('environment')
         category = self.request.GET.get('category')
         difficulty = self.request.GET.get('difficulty')
         pet_friendly = self.request.GET.get('pet_friendly')
@@ -19,6 +20,9 @@ class ProductList(ListView):
         shade_tolerant = self.request.GET.get('shade_tolerant')  # Assuming you’ve added this boolean field
         sort_by = self.request.GET.get('sort')
 
+        # Apply filters
+        if environment:
+            queryset = queryset.filter(environment=environment)
         if category:
             queryset = queryset.filter(category__name__iexact=category)
         if difficulty:
@@ -39,9 +43,13 @@ class ProductList(ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = PlantCategory.objects.all()
-        return context
+    context = super().get_context_data(**kwargs)
+    context['categories'] = PlantCategory.objects.all()
+    querystring = self.request.GET.copy()
+    if 'page' in querystring:
+        querystring.pop('page')
+    context['querystring'] = querystring.urlencode()
+    return context
 
 def product_detail(request, pk):
     plant = get_object_or_404(ShopPlant, pk=pk)
