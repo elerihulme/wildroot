@@ -1,0 +1,8 @@
+.hero-image {
+    background: url('{% static "images/hero-image.jpg" %}') no-repeat center
+        center;
+    background-size: cover;
+    width: 100%;
+    height: 80vh;
+    position: relative;
+}

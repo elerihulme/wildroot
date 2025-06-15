@@ -18,7 +18,7 @@ class ProductList(ListView):
         difficulty = self.request.GET.get('difficulty')
         pet_friendly = self.request.GET.get('pet_friendly')
         air_purifying = self.request.GET.get('air_purifying')
-        shade_tolerant = self.request.GET.get('shade_tolerant')  # Assuming you’ve added this boolean field
+        shade_tolerant = self.request.GET.get('shade_tolerant') 
         sort_by = self.request.GET.get('sort')
 
         # Apply filters
@@ -33,7 +33,7 @@ class ProductList(ListView):
         if air_purifying == 'true':
             queryset = queryset.filter(air_purifying=True)
         if shade_tolerant == 'true':
-            queryset = queryset.filter(category__typical_light_requirements='low')  # assuming low light = shade
+            queryset = queryset.filter(category__typical_light_requirements='low')
 
         # Sorting
         if sort_by == 'price_low':

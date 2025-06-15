@@ -54,5 +54,6 @@
 {% endblock %}
 
 {% block postloadjs %}
+{{ block.super }}
 <script src="{% static 'js/bag.js' %}"></script>
 {% endblock %}

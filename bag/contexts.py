@@ -10,8 +10,12 @@ def bag_contents(request):
     plant_count = 0
     bag = request.session.get('bag', {})
 
-    for item_id, quantity in bag.items():
-        plant = ShopPlant.objects.get(id=item_id)
+    for item_id, quantity in list(bag.items()):
+        try:
+            plant = ShopPlant.objects.get(id=item_id)
+        except ShopPlant.DoesNotExist:
+            bag.pop(item_id)
+            continue
         total += quantity * plant.price
         plant_count += quantity
         bag_items.append({
@@ -20,6 +24,8 @@ def bag_contents(request):
             'plant': plant,
             'item_total': quantity * plant.price,
         })
+
+    request.session['bag'] = bag
 
     delivery = Decimal('5.00')
     grand_total = total + delivery
