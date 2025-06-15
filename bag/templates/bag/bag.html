@@ -45,7 +45,14 @@
     </div>
     {% else %}
     <p>Your bag is empty.</p>
+    <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
+        <p class="text-uppercase">Keep Shopping</p>
+    </a>
     {% endif %}
 </div>
 
+{% endblock %}
+
+{% block postloadjs %}
+<script src="{% static 'js/bag.js' %}"></script>
 {% endblock %}

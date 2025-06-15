@@ -98,10 +98,6 @@ def delete_photo(request, photo_id):
 @require_POST
 def delete_plant(request, plant_id):
     plant = get_object_or_404(UserPlant, id=plant_id, user=request.user)
-    if request.method == 'POST':
-        plant.delete()
-        messages.success(request, f"{plant_name} has been removed from your garden.")
-        return redirect('garden')
-    
-    # Optional: add a confirmation step here if you want
-    return redirect('plant_detail', pk=plant_id)
+    plant.delete()
+    messages.success(request, f"{plant_name} has been removed from your garden.")
+    return redirect('garden')

@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.http import HttpResponse
 from django.contrib import messages
@@ -32,6 +31,7 @@ def adjust_bag(request, item_id):
     """
     Adjust the quantity of the specified plant to the specified amount
     """
+    plant = get_object_or_404(ShopPlant, pk=item_id)
     quantity = int(request.POST.get('quantity'))
     bag = request.session.get('bag', {})
 

@@ -1,5 +1,4 @@
 from decimal import Decimal
-from django.conf import settings
 from products.models import ShopPlant
 
 def bag_contents(request):
@@ -22,7 +21,7 @@ def bag_contents(request):
             'item_total': quantity * plant.price,
         })
 
-    delivery = Decimal('5.00')  # Flat rate for delivery
+    delivery = Decimal('5.00')
     grand_total = total + delivery
 
     context = {
