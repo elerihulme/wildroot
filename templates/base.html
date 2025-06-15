@@ -58,6 +58,22 @@
                 </ul>
             </div>
         </nav>
+        {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% block header %}
+        <div class="header-banner text-center py-3">
+            <h1>Welcome to Wild Root</h1>
+            <p>Your one-stop shop for all things plants!</p>
+        </div>
+        {% endblock %}
     </header>
 
     <main>

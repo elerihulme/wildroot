@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.contrib import messages
 from .models import UserPlant, UserPlantPhoto
 from .forms import UserPlantForm, UserPlantPhotoForm
 
@@ -38,8 +39,12 @@ def add_plant(request):
                     image=image,
                     image_alt=alt_text or f"{user_plant.nickname} photo"
                 )
+            
+            messages.success(request, f"{user_plant.nickname} was added to your garden.")
 
             return redirect('garden')
+        else:
+            messages.error(request, "There was an error adding your plant. Please check the form and try again.")
     else:
         form = UserPlantForm()
     
@@ -61,8 +66,12 @@ def edit_plant(request, plant_id):
                 photo = photo_form.save(commit=False)
                 photo.user_plant = plant
                 photo.save()
-
+                messages.success(request, "Photo added successfully.")
+            
+            messages.success(request, f"{plant.nickname} updated successfully.")
             return redirect('plant_detail', pk=plant.id)
+        else:
+            messages.error(request, "There was an error updating the plant.")
 
     else:
         form = UserPlantForm(instance=plant)
@@ -82,6 +91,7 @@ def delete_photo(request, photo_id):
     photo = get_object_or_404(UserPlantPhoto, id=photo_id, user_plant__user=request.user)
     plant_id = photo.user_plant.id
     photo.delete()
+    messages.success(request, "Photo deleted successfully.")
     return redirect('edit_plant', pk=plant_id)
 
 @login_required
@@ -90,6 +100,7 @@ def delete_plant(request, plant_id):
     plant = get_object_or_404(UserPlant, id=plant_id, user=request.user)
     if request.method == 'POST':
         plant.delete()
+        messages.success(request, f"{plant_name} has been removed from your garden.")
         return redirect('garden')
     
     # Optional: add a confirmation step here if you want
