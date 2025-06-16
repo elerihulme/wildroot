@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.templatetags.static import static
+from cloudinary.models import CloudinaryField
 
 class UserPlant(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_plants')
@@ -24,7 +25,7 @@ class UserPlant(models.Model):
 
 class UserPlantPhoto(models.Model):
     user_plant = models.ForeignKey(UserPlant, on_delete=models.CASCADE, related_name='photos')
-    image = models.ImageField(upload_to='user_plant_photos/')
+    image = CloudinaryField('user_plant_image', folder='user_plant_photos', blank=True, null=True)
     caption = models.CharField(max_length=255, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     image_alt = models.CharField(max_length=255, blank=False)
