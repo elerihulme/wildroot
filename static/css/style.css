@@ -3,3 +3,21 @@
     background-size: cover;
     height: 75vh;
 }
+
+.card-img-top {
+    height: 500px;
+    object-fit: cover;
+}
+
+.product-detail-img {
+    height: 750px;
+    object-fit: cover;
+    width: 100%;
+    overflow: hidden;
+}
+
+.carousel-item img {
+    max-height: 400px;
+    object-fit: contain;
+    margin: 0 auto;
+}

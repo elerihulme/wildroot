@@ -3,9 +3,6 @@ from .models import UserPlant, UserPlantPhoto
 
 class UserPlantForm(forms.ModelForm):
 
-    initial_photo = forms.ImageField(required=False, label="Initial Plant Photo")
-    image_alt = forms.CharField(required=False, label="Image Description")
-
     class Meta:
         model = UserPlant
         fields = ['plant_species', 'nickname', 'last_watered', 'notes']

@@ -26,29 +26,31 @@ def plant_detail(request, pk):
 def add_plant(request):
     if request.method == 'POST':
         form = UserPlantForm(request.POST, request.FILES)
+        photo_form = UserPlantPhotoForm(request.POST, request.FILES)
+
         if form.is_valid():
             user_plant = form.save(commit=False)
             user_plant.user = request.user
             user_plant.save()
 
-            image = form.cleaned_data.get('initial_photo')
-            alt_text = form.cleaned_data.get('image_alt')
-            if image:
-                UserPlantPhoto.objects.create(
-                    user_plant=user_plant,
-                    image=image,
-                    image_alt=alt_text or f"{user_plant.nickname} photo"
-                )
-            
-            messages.success(request, f"{user_plant.nickname} was added to your garden.")
+            if photo_form.is_valid() and photo_form.cleaned_data.get('image'):
+                photo = photo_form.save(commit=False)
+                photo.user_plant = user_plant
+                photo.save()
 
+            messages.success(request, f"{user_plant.nickname} was added to your garden.")
             return redirect('garden')
         else:
             messages.error(request, "There was an error adding your plant. Please check the form and try again.")
     else:
         form = UserPlantForm()
-    
-    return render(request, 'garden/add_plant.html', {'form': form})
+        photo_form = UserPlantPhotoForm()
+
+    return render(request, 'garden/add_plant.html', {
+        'form': form,
+        'photo_form': photo_form,
+    })
+
 
 @login_required
 def edit_plant(request, plant_id):
