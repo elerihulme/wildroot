@@ -5,9 +5,11 @@ from django.contrib import messages
 from .models import UserPlant, UserPlantPhoto
 from .forms import UserPlantForm, UserPlantPhotoForm
 
-@login_required
 def garden_list(request):
-    user_plants = UserPlant.objects.filter(user=request.user).prefetch_related('photos').order_by('-date_added')
+    user_plants = []
+    if request.user.is_authenticated:
+        user_plants = UserPlant.objects.filter(user=request.user).prefetch_related('photos').order_by('-date_added')
+
     context = {
         'user_plants': user_plants,
     }

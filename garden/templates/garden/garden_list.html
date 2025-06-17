@@ -4,6 +4,7 @@
 {% block extra_title %}| My Garden{% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
 <div class="container mt-5">
     <h1 class="text-center mb-4">My Garden</h1>
     <a href="{% url 'add_plant' %}" class="btn btn-success">
@@ -31,4 +32,10 @@
     <p class="text-center">You haven’t added any plants to your garden yet.</p>
     {% endif %}
 </div>
+{% else %}
+<div class="container mt-5">
+    <h1 class="text-center">My Garden</h1>
+    <p class="text-center">Please <a href="{% url 'account_login' %}">log in</a> to view your garden.</p>
+</div>
+{% endif %}
 {% endblock %}

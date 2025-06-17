@@ -4,46 +4,56 @@
 {% block extra_title %}| Home{% endblock %}
 
 {% block content %}
-<section class="hero-image text-white d-flex align-items-center justify-content-center">
-    <div class="text-center">
-        <h1>Grow Wild. Stay Rooted.</h1>
-        <p>Curated indoor and outdoor plants for every home</p>
-        <a href="{% url 'products' %}" class="btn">Shop Now</a>
+<!-- Hero -->
+<section class="hero-image d-flex align-items-center justify-content-center text-white text-center">
+    <div>
+        <h1 class="display-4 fw-bold">Grow Wild. Stay Rooted.</h1>
+        <p class="lead">Curated indoor and outdoor plants for every home</p>
+        <a href="{% url 'products' %}" class="btn btn-success btn-lg mt-3">Shop Now</a>
     </div>
 </section>
 
-<section class="mission">
-    <h2>Our Mission</h2>
-    <p>At Wild Root, we believe that plants add a certain calm and serenity that is needed in a busy modern world. We want to help you cultivate your own tranquil paradise — right at home.</p>
+<!-- Mission -->
+<section class="container py-5 text-center">
+    <h2 class="display-6 text-success">Our Mission</h2>
+    <p class="lead mt-3">
+        At Wild Root, we believe that plants add a certain calm and serenity that is needed in a busy modern world.
+        We want to help you cultivate your own tranquil paradise — right at home.
+    </p>
 </section>
 
-<section class="why-choose">
-    <h2>Why Choose Wild Root?</h2>
-    <ul>
-        <li>High quality, ethically sourced and hand-picked plants</li>
-        <li>Eco-friendly, plastic-free packaging</li>
-        <li>Delivery straight to your door</li>
+<!-- Why Choose Us -->
+<section class="container py-5 text-center bg-light">
+    <h2 class="display-6 text-success">Why Choose Wild Root?</h2>
+    <ul class="list-unstyled mt-4">
+        <li class="mb-2"><i class="fa-solid fa-seedling me-2 text-success"></i>High quality, ethically sourced and hand-picked plants</li>
+        <li class="mb-2"><i class="fa-solid fa-box-open me-2 text-success"></i>Eco-friendly, plastic-free packaging</li>
+        <li class="mb-2"><i class="fa-solid fa-truck me-2 text-success"></i>Delivery straight to your door</li>
     </ul>
 </section>
 
-<section class="browse-categories">
-    <h2>Browse Categories</h2>
-    <div class="categories">
-        <a href="{% url 'products' %}?environment=indoor" class="category-card">Indoor Plants</a>
-        <a href="{% url 'products' %}?environment=outdoor" class="category-card">Outdoor Plants</a>
+<!-- Browse Categories -->
+<section class="container py-5 text-center">
+    <h2 class="display-6 text-success">Browse Categories</h2>
+    <div class="row justify-content-center mt-4">
+        <div class="col-10 col-sm-6 col-md-4 mb-3">
+            <a href="{% url 'products' %}?environment=indoor" class="btn btn-outline-success w-100 py-4 fw-bold shadow-sm">Indoor Plants</a>
+        </div>
+        <div class="col-10 col-sm-6 col-md-4 mb-3">
+            <a href="{% url 'products' %}?environment=outdoor" class="btn btn-outline-success w-100 py-4 fw-bold shadow-sm">Outdoor Plants</a>
+        </div>
     </div>
 </section>
 
-<section>
+<!-- My Garden CTA -->
+<section class="py-5 bg-success-subtle text-center">
     <div class="container">
-        <h2 class="mb-4">Grow Your Own Virtual Garden</h2>
-        <p class="lead">
-            Keep track of your houseplants, upload photos, and store notes all in one place with our 
-            <strong>My Garden</strong> feature. Perfect for plant lovers who want to nurture and remember every leafy friend.
+        <h2 class="display-6 text-success">Grow Your Own Virtual Garden</h2>
+        <p class="lead mt-3">
+            Keep track of your houseplants, upload photos, and store notes all in one place with our
+            <strong>My Garden</strong> feature.
         </p>
-        <a href="{% url 'garden' %}" class="btn btn-success btn-lg mt-3">
-            Explore My Garden
-        </a>
+        <a href="{% url 'garden' %}" class="btn btn-success btn-lg mt-3">Explore My Garden</a>
     </div>
 </section>
 {% endblock %}
