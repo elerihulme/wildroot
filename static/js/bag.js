@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 display.textContent = current;
                 updateButtons(current);
 
-                if (control.closest("form")?.action.includes("adjust_bag")) {
+                if (control.closest("form")?.action.includes("/bag/adjust/")) {
                     control.closest("form").submit();
                 }
             }
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
             display.textContent = current;
             updateButtons(current);
 
-            if (control.closest("form")?.action.includes("adjust_bag")) {
+            if (control.closest("form")?.action.includes("/bag/adjust/")) {
                 control.closest("form").submit();
             }
         });
