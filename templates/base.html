@@ -36,26 +36,41 @@
 </head>
 <body>
     <header>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="nav-container">
-                <a href="{% url 'home' %}" class="logo">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 shadow-sm">
+            <div class="container position-relative justify-content-between">
+                <!-- Hamburger -->
+                <button class="navbar-toggler position-absolute start-0 align-self-start mt-2"
+                    type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Logo -->
+                <a class="navbar-brand mx-auto text-success logo-font fw-bold" href="{% url 'home' %}">
                     Wild Root <i class="fa-solid fa-leaf"></i>
                 </a>
-                <ul class="nav-links">
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'products' %}">All Plants</a></li>
-                    <li><a href="{% url 'products' %}?environment=indoor">Indoor Plants</a></li>
-                    <li><a href="{% url 'products' %}?environment=outdoor">Outdoor Plants</a></li>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'garden' %}">My Garden</a></li>
-                        <li><a href="{% url 'profile' %}">Profile</a></li>
-                        <li><a href="{% url 'account_logout' %}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{% url 'account_login' %}">Login</a></li>
-                        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-                    {% endif %}
-                    <li><a href="{% url 'view_bag' %}">Basket</a></li>
-                </ul>
+                <!-- Basket -->
+                <div class="position-absolute end-0 align-self-start mt-2">
+                    <a href="{% url 'view_bag' %}" class="btn btn-outline-success">
+                        <i class="fa-solid fa-basket-shopping"></i>
+                    </a>
+                </div>
+                <!-- Collapsible menu -->
+                <div class="collapse navbar-collapse mt-3 mt-lg-0" id="navbarNav">
+                    <ul class="navbar-nav mx-auto text-left">
+                        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'products' %}">All Plants</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'products' %}?environment=indoor">Indoor</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'products' %}?environment=outdoor">Outdoor</a></li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'garden' %}">My Garden</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'account_logout' %}">Logout</a></li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="{% url 'account_login' %}">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'account_signup' %}">Sign Up</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
         </nav>
         {% if messages %}
@@ -79,16 +94,16 @@
         <div class="container">
             <!-- Row 1: Social media icons -->
             <div class="mb-3">
-                <a href="https://www.instagram.com" class="text-dark mx-2" target="_blank" rel="noopener" aria-label="Instagram">
+                <a href="https://www.instagram.com" class="social-icon text-dark mx-2" target="_blank" rel="noopener" aria-label="Instagram">
                     <i class="fab fa-instagram fa-lg"></i>
                 </a>
-                <a href="https://www.twitter.com" class="text-dark mx-2" target="_blank" rel="noopener" aria-label="X (Twitter)">
+                <a href="https://www.twitter.com" class="social-icon text-dark mx-2" target="_blank" rel="noopener" aria-label="X (Twitter)">
                     <i class="fab fa-x-twitter fa-lg"></i>
                 </a>
-                <a href="https://www.facebook.com" class="text-dark mx-2" target="_blank" rel="noopener" aria-label="Facebook">
+                <a href="https://www.facebook.com" class="social-icon text-dark mx-2" target="_blank" rel="noopener" aria-label="Facebook">
                     <i class="fab fa-facebook fa-lg"></i>
                 </a>
-                <a href="https://www.pinterest.com" class="text-dark mx-2" target="_blank" rel="noopener" aria-label="Pinterest">
+                <a href="https://www.pinterest.com" class="social-icon text-dark mx-2" target="_blank" rel="noopener" aria-label="Pinterest">
                     <i class="fab fa-pinterest fa-lg"></i>
                 </a>
             </div>

@@ -1,7 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Seaweed+Script&display=swap");
+
+.logo-font {
+    font-family: "Seaweed Script", cursive;
+    font-size: 2.5rem;
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    color: #315c2b;
+    cursor: pointer;
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    background-color: #f8f9fa;
+}
 .hero-image {
     background: url("/static/images/hero-image.jpg") no-repeat center center;
     background-size: cover;
-    height: 75vh;
+    height: 50vh;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    text-decoration: none;
 }
 
 .card-img-top {
