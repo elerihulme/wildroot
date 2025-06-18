@@ -98,29 +98,36 @@
     </div>
     <!-- Product Grid -->
     <div class="row">
-        {% for plant in plants %}
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <a href="{% url 'product_detail' plant.pk %}">
-                    <img src="{{ plant.get_image_url }}" class="card-img-top" alt="{{ plant.image_alt|default:'No image available' }}">
-                </a>
-                <div class="card-body text-center">
-                    <h5 class="card-title">{{ plant.name }}</h5>
-                    {% if plant.botanical_name %}
-                        <p class="text-muted"><em>{{ plant.botanical_name }}</em></p>
-                    {% endif %}
-                    <p><strong>£{{ plant.price }}</strong></p>
+        {% if plants %}
+            {% for plant in plants %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <a href="{% url 'product_detail' plant.pk %}">
+                        <img src="{{ plant.get_image_url }}" class="card-img-top" alt="{{ plant.image_alt|default:'No image available' }}">
+                    </a>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ plant.name }}</h5>
+                        {% if plant.botanical_name %}
+                            <p class="text-muted"><em>{{ plant.botanical_name }}</em></p>
+                        {% endif %}
+                        <p><strong>£{{ plant.price }}</strong></p>
 
-                    <div>
-                        {% if plant.pet_friendly %}<span class="badge bg-success">Pet Friendly</span>{% endif %}
-                        {% if plant.air_purifying %}<span class="badge bg-primary">Air Purifying</span>{% endif %}
-                        {% if plant.environment == 'indoor' %}<span class="badge bg-info text-dark">Indoor</span>{% endif %}
-                        {% if plant.environment == 'outdoor' %}<span class="badge bg-secondary">Outdoor</span>{% endif %}
+                        <div>
+                            {% if plant.pet_friendly %}<span class="badge bg-success">Pet Friendly</span>{% endif %}
+                            {% if plant.air_purifying %}<span class="badge bg-primary">Air Purifying</span>{% endif %}
+                            {% if plant.environment == 'indoor' %}<span class="badge bg-info text-dark">Indoor</span>{% endif %}
+                            {% if plant.environment == 'outdoor' %}<span class="badge bg-secondary">Outdoor</span>{% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <div class="col-12 text-center mt-5">
+                <h4>No plants match your filters.</h4>
+                <a href="{% url 'products' %}" class="btn btn-outline-secondary mt-3">Clear Filters</a>
+            </div>
+        {% endif %}
     </div>
     <!-- Pagination -->
     {% if is_paginated %}

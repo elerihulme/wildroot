@@ -35,7 +35,7 @@
 
             <form class="form" action="{% url 'add_to_bag' plant.id %}" method="POST">
             {% csrf_token %}
-            <div class="form-group">Add commentMore actions
+            <div class="form-group">
                     <label for="quantity">Quantity:</label>
                     <div class="quantity-control d-inline-flex align-items-center">
                         <button type="button" class="btn btn-sm btn-outline-secondary minus-btn" disabled>
