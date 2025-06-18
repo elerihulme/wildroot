@@ -16,6 +16,7 @@
     </h1>
 
     <!-- Filter and Sort Options -->
+    <div class="card p-4 mb-5 border-0 shadow-sm">
     <form method="get" class="mb-4 row g-3 align-items-end">
         <!-- Environment filter -->
         <input type="hidden" name="environment" value="{{ request.GET.environment }}">
@@ -62,29 +63,39 @@
         </div>
 
         <!-- Tag filters -->
-        <div class="col-md-3">
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="pet_friendly" value="true" id="petFriendly"
-                    {% if request.GET.pet_friendly == "true" %}checked{% endif %}>
-                <label class="form-check-label" for="petFriendly">Pet Friendly</label>
-            </div>
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="air_purifying" value="true" id="airPurifying"
-                    {% if request.GET.air_purifying == "true" %}checked{% endif %}>
-                <label class="form-check-label" for="airPurifying">Air Purifying</label>
-            </div>
-            <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="shade_tolerant" value="true" id="shadeTolerant"
-                    {% if request.GET.shade_tolerant == "true" %}checked{% endif %}>
-                <label class="form-check-label" for="shadeTolerant">Shade Tolerant</label>
-            </div>
+        <div class="col-12 text-center mt-3">
+            <ul class="list-inline mb-0">
+                <li class="list-inline-item">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="pet_friendly" value="true" id="petFriendly"
+                            {% if request.GET.pet_friendly == "true" %}checked{% endif %}>
+                        <label class="form-check-label" for="petFriendly">Pet Friendly</label>
+                    </div>
+                </li>
+                <li class="list-inline-item">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="air_purifying" value="true" id="airPurifying"
+                            {% if request.GET.air_purifying == "true" %}checked{% endif %}>
+                        <label class="form-check-label" for="airPurifying">Air Purifying</label>
+                    </div>
+                </li>
+                <li class="list-inline-item">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="shade_tolerant" value="true" id="shadeTolerant"
+                            {% if request.GET.shade_tolerant == "true" %}checked{% endif %}>
+                        <label class="form-check-label" for="shadeTolerant">Shade Tolerant</label>
+                    </div>
+                </li>
+            </ul>
         </div>
 
-        <div class="col-12">
+
+        <div class="col-12 d-flex flex-column flex-md-row gap-2">
             <button type="submit" class="btn btn-outline-success w-100">Apply Filters</button>
-            <a href="{% url 'products' %}" class="btn btn-outline-secondary w-100 mt-2">Clear Filters</a>
+            <a href="{% url 'products' %}" class="btn btn-outline-secondary w-100">Clear Filters</a>
         </div>
     </form>
+    </div>
     <!-- Product Grid -->
     <div class="row">
         {% for plant in plants %}
@@ -111,6 +122,7 @@
         </div>
         {% endfor %}
     </div>
+    <!-- Pagination -->
     {% if is_paginated %}
     <nav aria-label="Page navigation">
         <ul class="pagination justify-content-center mt-4">

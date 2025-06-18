@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Seaweed+Script&display=swap");
 
+/*------------------------------------------------------------------------ General Styles -------------- */
+body {
+    font-family: "Nunito", sans-serif;
+    background-color: #f8f9fa;
+}
+
+/*------------------------------------------------------------------------ Nav Bar -------------- */
 .logo-font {
     font-family: "Seaweed Script", cursive;
     font-size: 2.5rem;
@@ -12,25 +19,31 @@
     cursor: pointer;
 }
 
-body {
-    font-family: "Nunito", sans-serif;
-    background-color: #f8f9fa;
+/*------------------------------------------------------------------------ Footer -------------- */
+.social-icon {
+    font-size: 1.5rem;
+    text-decoration: none;
 }
+
+/*------------------------------------------------------------------------ Home Page -------------- */
+
 .hero-image {
     background: url("/static/images/hero-image.jpg") no-repeat center center;
     background-size: cover;
     height: 50vh;
 }
 
-.social-icon {
-    font-size: 1.5rem;
-    text-decoration: none;
-}
-
+/*------------------------------------------------------------------------ Product List -------------- */
 .card-img-top {
     height: 500px;
     object-fit: cover;
 }
+
+a > img:hover {
+    cursor: pointer;
+}
+
+/*------------------------------------------------------------------------ Product Detail -------------- */
 
 .product-detail-img {
     height: 750px;
@@ -39,6 +52,7 @@ body {
     overflow: hidden;
 }
 
+/*------------------------------------------------------------------------ Garden Plant Detail -------------- */
 .carousel-item img {
     max-height: 400px;
     object-fit: contain;
