@@ -100,7 +100,7 @@
     <div class="row">
         {% if plants %}
             {% for plant in plants %}
-            <div class="col-md-4 mb-4">
+            <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card h-100">
                     <a href="{% url 'product_detail' plant.pk %}">
                         <img src="{{ plant.get_image_url }}" class="card-img-top" alt="{{ plant.image_alt|default:'No image available' }}">
@@ -125,7 +125,7 @@
         {% else %}
             <div class="col-12 text-center mt-5">
                 <h4>No plants match your filters.</h4>
-                <a href="{% url 'products' %}" class="btn btn-outline-secondary mt-3">Clear Filters</a>
+                <a href="{% url 'products' %}" class="btn btn-outline-secondary my-3">Clear Filters</a>
             </div>
         {% endif %}
     </div>

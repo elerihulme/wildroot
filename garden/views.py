@@ -93,10 +93,10 @@ def edit_plant(request, plant_id):
 @require_POST
 def delete_photo(request, photo_id):
     photo = get_object_or_404(UserPlantPhoto, id=photo_id, user_plant__user=request.user)
-    plant_id = photo.user_plant.id
+    plant = photo.user_plant
     photo.delete()
     messages.success(request, "Photo deleted successfully.")
-    return redirect('edit_plant', pk=plant_id)
+    return redirect('edit_plant', plant_id=plant.id)
 
 @login_required
 @require_POST

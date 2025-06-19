@@ -22,9 +22,9 @@
             <ul class="list-unstyled mt-3">
                 <li><strong>Environment:</strong> {{ plant.get_environment_display }}</li>
                 <li class="list-group-item"><strong>Category:</strong> {{ plant.category.name }}</li>
-                <li class="list-group-item"><strong>Typical Light Requirements:</strong> {{ plant.category.get_typical_light_requirements_display }}</li>
-                <li class="list-group-item"><strong>Typical Watering Frequency:</strong> {{ plant.category.get_typical_watering_frequency_display }}</li>
-                <li class="list-group-item"><strong>Typical Caring Difficulty:</strong> {{ plant.category.get_typical_caring_difficulty_display }}</li>
+                <li class="list-group-item"><strong>Light Requirements:</strong> {{ plant.category.get_typical_light_requirements_display }}</li>
+                <li class="list-group-item"><strong>Watering Frequency:</strong> {{ plant.category.get_typical_watering_frequency_display }}</li>
+                <li class="list-group-item"><strong>Caring Difficulty:</strong> {{ plant.category.get_typical_caring_difficulty_display }}</li>
                 {% if plant.pet_friendly %}
                     <li><span class="badge bg-success">Pet Friendly</span></li>
                 {% endif %}

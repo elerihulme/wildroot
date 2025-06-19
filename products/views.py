@@ -7,7 +7,7 @@ class ProductList(ListView):
     model = ShopPlant
     template_name = 'products/product_list.html'
     context_object_name = 'plants'
-    paginate_by = 9
+    paginate_by = 12
 
     def get_queryset(self):
         queryset = super().get_queryset()
