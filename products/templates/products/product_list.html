@@ -23,7 +23,7 @@
         <!-- Sort by price -->
         <div class="col-md-3">
             <label for="sort" class="form-label">Sort by</label>
-            <select name="sort" class="form-select">
+            <select id="sort" name="sort" class="form-select">
                 <option value="">Default</option>
                 <option value="price_low" {% if request.GET.sort == "price_low" %}selected{% endif %}>Price (Low - High)</option>
                 <option value="price_high" {% if request.GET.sort == "price_high" %}selected{% endif %}>Price (High - Low)</option>
@@ -33,7 +33,7 @@
         <!-- Filter by environment -->
         <div class="col-md-3">
             <label for="environment" class="form-label">Environment</label>
-            <select name="environment" class="form-select">
+            <select id="environment" name="environment" class="form-select">
                 <option value="">All</option>
                 <option value="indoor" {% if request.GET.environment == "indoor" %}selected{% endif %}>Indoor</option>
                 <option value="outdoor" {% if request.GET.environment == "outdoor" %}selected{% endif %}>Outdoor</option>
@@ -43,7 +43,7 @@
         <!-- Filter by category -->
         <div class="col-md-3">
             <label for="category" class="form-label">Category</label>
-            <select name="category" class="form-select">
+            <select id="category" name="category" class="form-select">
                 <option value="">All</option>
                 {% for cat in categories %}
                 <option value="{{ cat.name }}" {% if request.GET.category == cat.name %}selected{% endif %}>{{ cat.name }}</option>
@@ -54,7 +54,7 @@
         <!-- Filter by difficulty -->
         <div class="col-md-3">
             <label for="difficulty" class="form-label">Difficulty</label>
-            <select name="difficulty" class="form-select">
+            <select id="difficulty" name="difficulty" class="form-select">
                 <option value="">All</option>
                 <option value="easy" {% if request.GET.difficulty == "easy" %}selected{% endif %}>Easy</option>
                 <option value="medium" {% if request.GET.difficulty == "medium" %}selected{% endif %}>Medium</option>
