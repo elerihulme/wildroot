@@ -2,6 +2,7 @@ from django import forms
 from .models import Order
 
 class OrderForm(forms.ModelForm):
+    """ Form to collect and validate delivery and contact details for an order. """
     class Meta:
         model = Order
         fields = (

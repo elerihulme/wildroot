@@ -6,6 +6,10 @@ from .models import UserPlant, UserPlantPhoto
 from .forms import UserPlantForm, UserPlantPhotoForm
 
 def garden_list(request):
+    """
+    Display the list of plants in the authenticated user's garden.
+    If the user is not authenticated, an empty list is passed to the context.
+    """
     user_plants = []
     if request.user.is_authenticated:
         user_plants = UserPlant.objects.filter(user=request.user).prefetch_related('photos').order_by('-date_added')
@@ -17,6 +21,10 @@ def garden_list(request):
 
 @login_required
 def plant_detail(request, pk):
+    """
+    Display detailed information for a specific plant owned by the user,
+    including all associated photos.
+    """
     plant = get_object_or_404(UserPlant, pk=pk, user=request.user)
     photos = plant.get_all_photos()
     return render(request, 'garden/plant_detail.html', {
@@ -26,6 +34,7 @@ def plant_detail(request, pk):
 
 @login_required
 def add_plant(request):
+    """ Handle the addition of a new plant to the user's garden. """
     if request.method == 'POST':
         form = UserPlantForm(request.POST, request.FILES)
         photo_form = UserPlantPhotoForm(request.POST, request.FILES)
@@ -56,6 +65,10 @@ def add_plant(request):
 
 @login_required
 def edit_plant(request, plant_id):
+    """
+    Handle the editing of an existing plant in the user's garden.
+    Allows updating plant details and adding new photos.
+    """
     plant = get_object_or_404(UserPlant, id=plant_id, user=request.user)
     photos = plant.photos.order_by('timestamp')
 
@@ -92,6 +105,7 @@ def edit_plant(request, plant_id):
 @login_required
 @require_POST
 def delete_photo(request, photo_id):
+    """ Handle the deletion of a specific photo associated with a user's plant. """
     photo = get_object_or_404(UserPlantPhoto, id=photo_id, user_plant__user=request.user)
     plant = photo.user_plant
     photo.delete()
@@ -101,6 +115,7 @@ def delete_photo(request, photo_id):
 @login_required
 @require_POST
 def delete_plant(request, plant_id):
+    """ Handle the deletion of a user's plant from their garden. """
     plant = get_object_or_404(UserPlant, id=plant_id, user=request.user)
     plant.delete()
     messages.success(request, f"{plant.name} has been removed from your garden.")

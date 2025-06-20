@@ -4,6 +4,10 @@ from cloudinary.models import CloudinaryField
 
 
 class PlantCategory(models.Model):
+    """
+    Model to represent a category of plants in the shop.
+    Each category can have different light, watering, and caring requirements.
+    """
     LIGHT_REQUIREMENTS = [
         ('low', 'Low Light'),
         ('medium', 'Medium Light'),
@@ -39,6 +43,7 @@ class PlantCategory(models.Model):
 
 
 class ShopPlant(models.Model):
+    """ Model to represent a plant available in the shop. """
     ENVIRONMENTS = [
         ('indoor', 'Indoor'),
         ('outdoor', 'Outdoor'),
@@ -61,6 +66,10 @@ class ShopPlant(models.Model):
 
 
     def get_image_url(self):
+        """
+        Return the URL of the plant's image.
+        If no image is uploaded, return the path to a placeholder image.
+        """
         if self.image:
             return self.image.url
         return static('images/placeholder.png')

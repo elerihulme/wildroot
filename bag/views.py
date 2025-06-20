@@ -4,7 +4,7 @@ from django.contrib import messages
 from products.models import ShopPlant
 
 def view_bag(request):
-    """ A view that renders the shopping bag contents page """
+    """ Renders the shopping bag page """
     return render(request, 'bag/bag.html')
 
 def add_to_bag(request, item_id):

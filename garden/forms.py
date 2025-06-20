@@ -2,6 +2,7 @@ from django import forms
 from .models import UserPlant, UserPlantPhoto
 
 class UserPlantForm(forms.ModelForm):
+    """ Form to collect or update user plant details. """
 
     class Meta:
         model = UserPlant
@@ -16,6 +17,7 @@ class UserPlantForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control'
 
 class UserPlantPhotoForm(forms.ModelForm):
+    """ Form to upload user plant photo. """
     class Meta:
         model = UserPlantPhoto
         fields = ['image', 'image_alt', 'caption']

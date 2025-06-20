@@ -4,6 +4,7 @@ from .models import ShopPlant, PlantCategory
 from django.contrib import messages
 
 class ProductList(ListView):
+    """ View to list all plants with filtering and sorting options. """
     model = ShopPlant
     template_name = 'products/product_list.html'
     context_object_name = 'plants'
@@ -44,6 +45,7 @@ class ProductList(ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
+        """ Add additional context data for the template. """
         context = super().get_context_data(**kwargs)
         context['categories'] = PlantCategory.objects.all()
         querystring = self.request.GET.copy()
@@ -53,5 +55,6 @@ class ProductList(ListView):
         return context
 
 def product_detail(request, pk):
+    """ View to display detailed information about a specific plant. """
     plant = get_object_or_404(ShopPlant, pk=pk)
     return render(request, 'products/product_detail.html', {'plant': plant})
