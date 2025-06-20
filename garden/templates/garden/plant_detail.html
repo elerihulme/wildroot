@@ -6,6 +6,7 @@
 {% block content %}
 <div class="container mt-5">
     <div>
+        <!-- Navigation Button -->
         <a href="{% url 'garden' %}" class="btn btn-outline-secondary">
             <i class="fas fa-arrow-left"></i> Back to Garden
         </a>
@@ -13,6 +14,7 @@
     <div class="plant-detail-container">
         <div class="row">
             <div class="col-sm-6 text-center plant-detail">
+                <!-- Plant Details -->
                 <h2>{{ plant.nickname }} <small class="text-muted">({{ plant.plant_species }})</small></h2>
                 <p><strong>Date Added:</strong> {{ plant.date_added|date:"F j, Y" }}</p>
                 {% if plant.last_watered %}
@@ -21,13 +23,17 @@
                 {% if plant.notes %}
                     <p><strong>Notes:</strong> {{ plant.notes }}</p>
                 {% endif %}
+                <!-- Edit Button -->
                 <a href="{% url 'edit_plant' plant.id %}" class="btn btn-warning">Edit Plant</a>
+                <!-- Delete Button -->
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePlantModal">
                 Delete Plant
                 </button>
             </div>
+            <!-- Plant Photos -->
             <div class="col-sm-6 plant-detail text-center d-flex justify-content-center">
                 {% if photos %}
+                    <!-- Image Carousel -->
                     <div id="plantCarousel" class="carousel slide mt-4" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             {% for photo in photos %}
@@ -39,6 +45,7 @@
                                     </div>
                             {% endfor %}
                         </div>
+                        <!-- Carousel Buttons -->
                         <button class="carousel-control-prev" type="button" data-bs-target="#plantCarousel" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon"></span>
                         </button>
@@ -47,6 +54,7 @@
                         </button>
                     </div>
                 {% else %}
+                    <!-- No Photos Message -->
                     <p>No photos yet.</p>
                 {% endif %}
             </div>

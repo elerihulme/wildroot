@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container mt-5">
     <h1 class="text-center shopping-bag-heading mb-4">Shopping Bag</h1>
-
+    <!-- Bag Items Table -->
     {% if bag_items %}
     <div class="table-responsive">
         <table class="table table-hover bag-table">
@@ -22,48 +22,52 @@
             <tbody>
                 {% for item in bag_items %}
                 <tr>
+                    <!-- Product Name -->
                     <td>{{ item.plant.name }}</td>
+                    <!-- Product Quantity -->
                     <td>
                         <form action="{% url 'adjust_bag' item.item_id %}" method="POST" class="d-flex">
                             {% csrf_token %}
                             <div class="quantity-control d-inline-flex align-items-center" data-item-id="{{ item.item_id }}">
                                 <button type="button" class="btn btn-sm btn-outline-secondary minus-btn"
-                                    {% if item.quantity == 1 %}disabled{% endif %}>
+                                    {% if item.quantity == 1 %}disabled{% endif %} aria-label="Decrease Quantity">
                                     <i class="fa-solid fa-minus"></i>
                                 </button>
                                 <span class="mx-2 quantity-display">{{ item.quantity }}</span>
-                                <button type="button" class="btn btn-sm btn-outline-secondary plus-btn">
+                                <button type="button" class="btn btn-sm btn-outline-secondary plus-btn" aria-label="Increase Quantity">
                                     <i class="fa-solid fa-plus"></i>
                                 </button>
                                 <input type="hidden" name="quantity" class="quantity-input" value="{{ item.quantity }}">
                             </div>
                         </form>
                     </td>
+                    <!-- Product Price -->
                     <td>£{{ item.plant.price }}</td>
+                    <!-- Item Total -->
                     <td>£{{ item.item_total }}</td>
                     <td>
-                        <button class="btn btn-sm btn-danger remove-btn" onclick="removeFromBag('{{ item.item_id }}')">Remove</button>
+                        <button class="btn btn-sm btn-danger remove-btn" onclick="removeFromBag('{{ item.item_id }}')" aria-label="Remove item from bag">Remove</button>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-
+    <!-- Total -->
     <div class="text-end total-row">
         Total: £{{ total }}
     </div>
-
+    <!-- Checkout Button -->
     <div class="text-end mt-4">
-        <a href="{% url 'checkout' %}" class="btn btn-success btn-lg px-5">
+        <a href="{% url 'checkout' %}" class="btn btn-success btn-lg px-5" aria-label="Button to Proceed to Checkout">
             Proceed to Checkout
         </a>
     </div>
-
+    <!-- Empty Bag Text -->
     {% else %}
     <div class="text-center bag-empty-msg">
         <p>Your bag is empty.</p>
-        <a href="{% url 'products' %}" class="btn btn-outline-success mt-3">
+        <a href="{% url 'products' %}" class="btn btn-outline-success mt-3" aria-label="Button to continue shopping">
             <i class="fas fa-leaf me-2"></i> Keep Shopping
         </a>
     </div>

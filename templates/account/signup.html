@@ -10,8 +10,8 @@
 <div class="container">
   <div class="row mt-4">
     <div class="col-md-8 mt-3 offset-md-2">
+      <!-- Sign Up Message -->
       <h1>{% trans "Sign Up" %}</h1>
-
       <p>
         {% blocktrans %}
         Welcome to Wild Root.
@@ -26,12 +26,14 @@
   </div>
   <div class="row">
     <div class="col-md-8 mt-3 offset-md-2">
+      <!-- Sign Up Form -->
       <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
         {{ form.as_p }}
         {% if redirect_field_value %}
         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
+        <!-- Submit Button -->
         <button class="btn btn-success right" type="submit" aria-label="Submit sign up form">
           {% trans "Sign Up" %} &raquo;
         </button>

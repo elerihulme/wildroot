@@ -88,11 +88,10 @@
                 </li>
             </ul>
         </div>
-
-
+        <!-- Filter Buttons -->
         <div class="col-12 d-flex flex-column flex-md-row gap-2">
-            <button type="submit" class="btn btn-outline-success w-100">Apply Filters</button>
-            <a href="{% url 'products' %}" class="btn btn-outline-secondary w-100">Clear Filters</a>
+            <button type="submit" class="btn btn-outline-success w-100" aria-label="Button to Apply Filters">Apply Filters</button>
+            <a href="{% url 'products' %}" class="btn btn-outline-secondary w-100" aria-label="Button to Clear Filters">Clear Filters</a>
         </div>
     </form>
     </div>
@@ -102,16 +101,18 @@
             {% for plant in plants %}
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card h-100">
-                    <a href="{% url 'product_detail' plant.pk %}">
+                    <!-- Plant Image -->
+                    <a href="{% url 'product_detail' plant.pk %}" aria-label="Link to {{ plant.name }} details">
                         <img src="{{ plant.get_image_url }}" class="card-img-top" alt="{{ plant.image_alt|default:'No image available' }}">
                     </a>
+                    <!-- Plant Details -->
                     <div class="card-body text-center">
                         <h5 class="card-title">{{ plant.name }}</h5>
                         {% if plant.botanical_name %}
                             <p class="text-muted"><em>{{ plant.botanical_name }}</em></p>
                         {% endif %}
                         <p><strong>£{{ plant.price }}</strong></p>
-
+                        <!-- Plant Tags -->
                         <div>
                             {% if plant.pet_friendly %}<span class="badge bg-success">Pet Friendly</span>{% endif %}
                             {% if plant.air_purifying %}<span class="badge bg-primary">Air Purifying</span>{% endif %}
@@ -123,9 +124,10 @@
             </div>
             {% endfor %}
         {% else %}
+            <!-- No Plants Found Message -->
             <div class="col-12 text-center mt-5">
                 <h4>No plants match your filters.</h4>
-                <a href="{% url 'products' %}" class="btn btn-outline-secondary my-3">Clear Filters</a>
+                <a href="{% url 'products' %}" class="btn btn-outline-secondary my-3" aria-label="Button to Clear Filters">Clear Filters</a>
             </div>
         {% endif %}
     </div>
@@ -136,7 +138,7 @@
 
             {% if page_obj.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ querystring }}" aria-label="Previous">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}&{{ querystring }}" aria-label="Previous Page">
                     <span aria-hidden="true">&laquo; Previous</span>
                 </a>
             </li>
@@ -144,7 +146,7 @@
 
             {% if page_obj.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ querystring }}" aria-label="Next">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}&{{ querystring }}" aria-label="Next Page">
                     <span aria-hidden="true">Next &raquo;</span>
                 </a>
             </li>

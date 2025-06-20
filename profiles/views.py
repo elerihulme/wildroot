@@ -4,7 +4,9 @@ from .models import UserProfile
 from .forms import UserProfileForm
 from checkout.models import Order
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def profile(request):
     """ Display the user's profile. """
 
@@ -32,6 +34,7 @@ def profile(request):
     return render(request, template, context)
 
 
+@login_required
 def order_history(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 

@@ -12,14 +12,16 @@
             </div>
         </div>
         <div class="row mt-4">
+            <!-- User Saved Info -->
             <div class="col-12 col-lg-6">
                 <h2 class="text-muted">Delivery Information</h2>
                 <form class="mt-3" action="{% url 'profile' %}" method="POST" id="profile-update-form">
                     {% csrf_token %}
                     {{ form|crispy }}
-                    <button class="btn btn-success btn-lg float-end mt-3">Update Information</button>
+                    <button class="btn btn-success btn-lg float-end mt-3" aria-label="Button to apply profile information updates">Update Information</button>
                 </form>
             </div>
+            <!-- User Order History -->
             <div class="col-12 col-lg-6">
                 <h2 class="text-muted">Order History</h2>
                 <div class="order-history table-responsive mt-4">
@@ -36,7 +38,7 @@
                                 <tr>
                                     <td>
                                         <a href="{% url 'order_history' order.order_number %}"
-                                        title="{{ order.order_number }}">
+                                        title="{{ order.order_number }}" aria-label="Link to order details for {{ order.order_number }}">
                                             {{ order.order_number|truncatechars:6 }}
                                         </a>
                                     </td>

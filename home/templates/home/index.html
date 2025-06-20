@@ -7,9 +7,9 @@
 <!-- Hero -->
 <section class="hero-image d-flex align-items-center justify-content-center text-white text-center">
     <div>
-        <h1 class="display-4 fw-bold solgan">Grow Wild. Stay Rooted.</h1>
+        <h1 class="display-4 fw-bold slogan">Grow Wild. Stay Rooted.</h1>
         <p class="lead">Curated indoor and outdoor plants for every home</p>
-        <a href="{% url 'products' %}" class="btn btn-success btn-lg mt-3">Shop Now</a>
+        <a href="{% url 'products' %}" class="btn btn-success btn-lg mt-3" aria-label="Button to shop for all plant">Shop Now</a>
     </div>
 </section>
 
@@ -26,9 +26,15 @@
 <section class="container py-5 text-center bg-light">
     <h2 class="display-6 text-success">Why Choose Wild Root?</h2>
     <ul class="list-unstyled mt-4">
-        <li class="mb-2"><i class="fa-solid fa-seedling me-2 text-success"></i>High quality, ethically sourced and hand-picked plants</li>
-        <li class="mb-2"><i class="fa-solid fa-box-open me-2 text-success"></i>Eco-friendly, plastic-free packaging</li>
-        <li class="mb-2"><i class="fa-solid fa-truck me-2 text-success"></i>Delivery straight to your door</li>
+        <li class="mb-2">
+            <i class="fa-solid fa-seedling me-2 text-success"></i>High quality, ethically sourced and hand-picked plants
+        </li>
+        <li class="mb-2">
+            <i class="fa-solid fa-box-open me-2 text-success"></i>Eco-friendly, plastic-free packaging
+        </li>
+        <li class="mb-2">
+            <i class="fa-solid fa-truck me-2 text-success"></i>Delivery straight to your door
+        </li>
     </ul>
 </section>
 
@@ -37,10 +43,14 @@
     <h2 class="display-6 text-success">Browse Categories</h2>
     <div class="row justify-content-center mt-4">
         <div class="col-10 col-sm-6 col-md-4 mb-3">
-            <a href="{% url 'products' %}?environment=indoor" class="btn btn-outline-success w-100 py-4 fw-bold shadow-sm">Indoor Plants</a>
+            <a href="{% url 'products' %}?environment=indoor" class="btn btn-outline-success w-100 py-4 fw-bold shadow-sm" aria-label="Button to shop indoor plants">
+                Indoor Plants
+            </a>
         </div>
         <div class="col-10 col-sm-6 col-md-4 mb-3">
-            <a href="{% url 'products' %}?environment=outdoor" class="btn btn-outline-success w-100 py-4 fw-bold shadow-sm">Outdoor Plants</a>
+            <a href="{% url 'products' %}?environment=outdoor" class="btn btn-outline-success w-100 py-4 fw-bold shadow-sm" aria-label="Button to shop outdoor plants">
+                Outdoor Plants
+            </a>
         </div>
     </div>
 </section>
@@ -53,7 +63,7 @@
             Keep track of your houseplants, upload photos, and store notes all in one place with our
             <strong>My Garden</strong> feature.
         </p>
-        <a href="{% url 'garden' %}" class="btn btn-success btn-lg mt-3">Explore My Garden</a>
+        <a href="{% url 'garden' %}" class="btn btn-success btn-lg mt-3" aria-label="Button to view your garden">Explore My Garden</a>
     </div>
 </section>
 {% endblock %}

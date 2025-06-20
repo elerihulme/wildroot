@@ -5,12 +5,14 @@
 
 {% block content %}
 <div class="container mt-5 success-message">
+    <!-- Success Message -->
     <h2 class="text-center">Thank you for your purchase!</h2>
     <p class="text-center">Order: <strong>{{ order.order_number }}</strong></p>
     <p class="text-center">An email confirmation has been sent to: <strong>{{ order.email }}</strong></p>
 
     <hr>
 
+    <!-- Order Summary -->
     <h4>Order Info</h4>
     <ul class="list-group mb-4">
         <li class="list-group-item"><strong>Order Number:</strong> {{ order.order_number }}</li>
@@ -52,11 +54,12 @@
         </li>
     </ul>
 
+    <!-- Navigation Buttons -->
     <div class="text-center">
         {% if from_profile %}
-        <a href="{% url 'profile' %}" class="btn btn-primary">Back to Profile</a>
+        <a href="{% url 'profile' %}" class="btn btn-primary" aria-label="Button to return to Profile">Back to Profile</a>
         {% else %}
-        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+        <a href="{% url 'home' %}" class="btn btn-primary" aria-label="Button to return to Home Page">Back to Home</a>
         {% endif %}
     </div>
 </div>

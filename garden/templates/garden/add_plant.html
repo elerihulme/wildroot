@@ -7,24 +7,27 @@
 
 {% block content %}
 <div class="container mt-5">
+    
     <h1 class="mb-4 text-center">
         {% if editing %}Edit {{ plant.nickname }}{% else %}Add a New Plant{% endif %}
     </h1>
     <div class="add-plant-form">
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
+            <!-- Plant Details -->
             {{ form.as_p }}
             <hr>
+            <!-- Add Photo -->
             <h4>Add a Photo</h4>
             {{ photo_form.as_p }}
-
-            <button type="submit" class="btn btn-success mb-3">
+            <!-- Submit/Cancel Buttons -->
+            <button type="submit" class="btn btn-success mb-3" aria-label="{% if editing %}Update Plant Button{% else %}Add Plant Button{% endif %}">
                 {% if editing %}Update Plant{% else %}Add Plant{% endif %}
             </button>
             <a href="{% url 'garden' %}" class="btn btn-secondary mb-3">Cancel</a>
         </form>
     </div>
-
+    <!-- Plant Photos -->
     {% if editing and photos %}
     <hr>
     <h4 class="mt-4">Photos</h4>
@@ -37,7 +40,7 @@
                     <p class="card-text">{{ photo.caption }}</p>
                     <form method="POST" action="{% url 'delete_photo' photo.id %}">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-danger btn-sm w-100">Delete Photo</button>
+                        <button type="submit" class="btn btn-danger btn-sm w-100" aria-label="Delete Photo Button">Delete Photo</button>
                     </form>
                 </div>
             </div>
