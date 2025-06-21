@@ -119,5 +119,5 @@ def delete_plant(request, plant_id):
     """ Handle the deletion of a user's plant from their garden. """
     plant = get_object_or_404(UserPlant, id=plant_id, user=request.user)
     plant.delete()
-    messages.success(request, f"{plant.name} has been removed from your garden.")
+    messages.success(request, f"{plant.nickname} has been removed from your garden.")
     return redirect('garden')

@@ -30,3 +30,12 @@ class OrderForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             field.label = field.label.title().replace('_', ' ')
+
+        # Add HTML5 regex pattern to match server-side postcode validator
+        self.fields['postcode'].widget.attrs['pattern'] = (
+            r"(GIR ?0AA|[A-PR-UWYZ][0-9][0-9]? ?[0-9][ABD-HJLNP-UW-Z]{2}|"
+            r"[A-PR-UWYZ][A-HK-Y][0-9][0-9]? ?[0-9][ABD-HJLNP-UW-Z]{2}|"
+            r"[A-PR-UWYZ][0-9][A-HJKSTUW]? ?[0-9][ABD-HJLNP-UW-Z]{2}|"
+            r"[A-PR-UWYZ][A-HK-Y][0-9][ABEHMNPRVWXY]? ?[0-9][ABD-HJLNP-UW-Z]{2})"
+        )
+        self.fields['postcode'].widget.attrs['title'] = "Enter a valid UK postcode"
