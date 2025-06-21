@@ -100,11 +100,10 @@
         {% if plants %}
             {% for plant in plants %}
             <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card h-100">
+                <div class="card h-100 position-relative">
                     <!-- Plant Image -->
-                    <a href="{% url 'product_detail' plant.pk %}" aria-label="Link to {{ plant.name }} details">
-                        <img src="{{ plant.get_image_url }}" class="card-img-top" alt="{{ plant.image_alt|default:'No image available' }}">
-                    </a>
+                    <img src="{{ plant.get_image_url }}" class="card-img-top" alt="{{ plant.image_alt|default:'No image available' }}">
+                    
                     <!-- Plant Details -->
                     <div class="card-body text-center">
                         <h5 class="card-title">{{ plant.name }}</h5>
@@ -112,6 +111,7 @@
                             <p class="text-muted"><em>{{ plant.botanical_name }}</em></p>
                         {% endif %}
                         <p><strong>£{{ plant.price }}</strong></p>
+
                         <!-- Plant Tags -->
                         <div>
                             {% if plant.pet_friendly %}<span class="badge bg-success">Pet Friendly</span>{% endif %}
@@ -119,6 +119,9 @@
                             {% if plant.environment == 'indoor' %}<span class="badge bg-info text-dark">Indoor</span>{% endif %}
                             {% if plant.environment == 'outdoor' %}<span class="badge bg-secondary">Outdoor</span>{% endif %}
                         </div>
+
+                        <!-- Invisible stretched link -->
+                        <a href="{% url 'product_detail' plant.pk %}" class="stretched-link" aria-label="Link to {{ plant.name }} details"></a>
                     </div>
                 </div>
             </div>
@@ -156,4 +159,28 @@
     </nav>
     {% endif %}
 </div>
+<!-- Go to Top Button -->
+<button onclick="topFunction()" id="goTopBtn" title="Go to top" class="btn btn-success rounded-circle">
+    <i class="fa-solid fa-arrow-up"></i>
+</button>
+{% endblock %}
+
+{% block postloadjs %}
+{{ block.super }}
+<script>
+    // Show button when scrolling down
+    window.onscroll = function () {
+        const btn = document.getElementById("goTopBtn");
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            btn.style.display = "block";
+        } else {
+            btn.style.display = "none";
+        }
+    };
+
+    // Scroll to top smoothly
+    function topFunction() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
 {% endblock %}
