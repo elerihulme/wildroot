@@ -40,7 +40,7 @@
 <!-- Not Authenticated Message -->
 <div class="container mt-5">
     <h1 class="text-center">My Garden</h1>
-    <p class="text-center">Please <a href="{% url 'account_login' %}" aria-label="Link to Log In Page">log in</a> to view your garden.</p>
+    <p class="text-center">Please <a href="{% url 'account_login' %}" aria-label="Link to Log In Page">log in</a> or <a href="{% url 'account_signup' %}" aria-label="Link to Signup Page">sign up</a> to view your garden.</p>
 </div>
 {% endif %}
 {% endblock %}

@@ -4,6 +4,11 @@
 {% block extra_title %}| Shop Plants{% endblock %}
 
 {% block content %}
+<!-- UK Delivery Banner -->
+<div class="uk-banner bg-warning text-center py-2">
+    <p class="mb-0 fw-semibold text-dark"><i class="fa-solid fa-truck"></i> UK Only Delivery</p>
+</div>
+<!-- Hero -->
 <div class="container mt-5">
     <h1 class="text-center mb-4">
         {% if request.GET.environment == 'indoor' %}

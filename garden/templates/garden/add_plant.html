@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block extra_title %}
     {% if editing %}| Edit {{ plant.nickname }}{% else %}| Add Plant{% endif %}
@@ -15,16 +16,16 @@
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <!-- Plant Details -->
-            {{ form.as_p }}
+            {{ form |crispy }}
             <hr>
             <!-- Add Photo -->
             <h4>Add a Photo</h4>
-            {{ photo_form.as_p }}
+            {{ photo_form |crispy }}
             <!-- Submit/Cancel Buttons -->
-            <button type="submit" class="btn btn-success mb-3" aria-label="{% if editing %}Update Plant Button{% else %}Add Plant Button{% endif %}">
+            <button type="submit" class="btn btn-success my-3" aria-label="{% if editing %}Update Plant Button{% else %}Add Plant Button{% endif %}">
                 {% if editing %}Update Plant{% else %}Add Plant{% endif %}
             </button>
-            <a href="{% url 'garden' %}" class="btn btn-secondary mb-3">Cancel</a>
+            <a href="{% url 'garden' %}" class="btn btn-secondary my-3">Cancel</a>
         </form>
     </div>
     <!-- Plant Photos -->

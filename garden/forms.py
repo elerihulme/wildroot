@@ -21,3 +21,31 @@ class UserPlantPhotoForm(forms.ModelForm):
     class Meta:
         model = UserPlantPhoto
         fields = ['image', 'image_alt', 'caption']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Set optional by default
+        self.fields['caption'].required = False
+        self.fields['image_alt'].required = False
+
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+        self.fields['image_alt'].label = "Description"
+
+
+    def clean(self):
+        cleaned_data = super().clean()
+        image = cleaned_data.get('image')
+        caption = cleaned_data.get('caption')
+        image_alt = cleaned_data.get('image_alt')
+
+        # If image is provided, caption and alt are required
+        if image:
+            if not caption:
+                self.add_error('caption', 'Please add a caption for the photo.')
+            if not image_alt:
+                self.add_error('image_alt', 'Please add alt text for the photo.')
+
+        return cleaned_data

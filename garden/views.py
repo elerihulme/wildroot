@@ -39,12 +39,13 @@ def add_plant(request):
         form = UserPlantForm(request.POST, request.FILES)
         photo_form = UserPlantPhotoForm(request.POST, request.FILES)
 
-        if form.is_valid():
+        if form.is_valid() and photo_form.is_valid():
             user_plant = form.save(commit=False)
             user_plant.user = request.user
             user_plant.save()
 
-            if photo_form.is_valid() and photo_form.cleaned_data.get('image'):
+            # Save photo only if an image is provided
+            if photo_form.cleaned_data.get('image'):
                 photo = photo_form.save(commit=False)
                 photo.user_plant = user_plant
                 photo.save()

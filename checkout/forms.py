@@ -24,6 +24,7 @@ class OrderForm(forms.ModelForm):
             ('GB', 'United Kingdom')
         ]
         self.fields['country'].initial = 'GB'
+        self.fields['country'].widget.attrs['readonly'] = True
 
         # Add Bootstrap classes for styling
         for field_name, field in self.fields.items():

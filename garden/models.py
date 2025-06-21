@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.templatetags.static import static
 from cloudinary.models import CloudinaryField
+from django.core.exceptions import ValidationError
+from django.utils import timezone
+
 
 class UserPlant(models.Model):
     """
@@ -17,6 +20,14 @@ class UserPlant(models.Model):
 
     def __str__(self):
         return f"{self.nickname} ({self.plant_species})"
+    
+    def save(self, *args, **kwargs):
+        """
+        Override save method to ensure last_watered is not in the future.
+        """
+        if self.last_watered and self.last_watered > timezone.now():
+            raise ValidationError("Last watered date cannot be in the future.")
+        super().save(*args, **kwargs)
 
     def get_latest_image_url(self):
         """
