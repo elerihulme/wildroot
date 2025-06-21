@@ -1,5 +1,6 @@
 from django import forms
 from .models import UserPlant, UserPlantPhoto
+from django.utils import timezone
 
 class UserPlantForm(forms.ModelForm):
     """ Form to collect or update user plant details. """
@@ -15,6 +16,14 @@ class UserPlantForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+
+    def clean_last_watered(self):
+        last_watered = self.cleaned_data.get('last_watered')
+        if last_watered and last_watered > timezone.now():
+            raise forms.ValidationError(
+                "Last watered date cannot be in the future."
+            )
+        return last_watered
 
 class UserPlantPhotoForm(forms.ModelForm):
     """ Form to upload user plant photo. """
