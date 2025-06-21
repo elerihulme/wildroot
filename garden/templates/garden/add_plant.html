@@ -20,6 +20,7 @@
             <hr>
             <!-- Add Photo -->
             <h4>Add a Photo</h4>
+            <p class="text-muted">Only one photo can be uploaded at a time, but one additional photo can be added each time you edit your plant.</p>
             {{ photo_form |crispy }}
             <!-- Submit/Cancel Buttons -->
             <button type="submit" class="btn btn-success my-3" aria-label="{% if editing %}Update Plant Button{% else %}Add Plant Button{% endif %}">
