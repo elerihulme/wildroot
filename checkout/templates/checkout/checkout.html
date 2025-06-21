@@ -4,11 +4,14 @@
 
 {% block extra_title %}| Checkout{% endblock %}
 
-{% block content %}
 <!-- UK Delivery Banner -->
+{% block delivery_banner %}
 <div class="uk-banner bg-warning text-center py-2">
     <p class="mb-0 fw-semibold text-dark"><i class="fa-solid fa-truck"></i> UK Only Delivery</p>
 </div>
+{% endblock %}
+
+{% block content %}
 <div id="payment-page" class="container mt-5">
     <h2 class="mb-4 text-center">Checkout</h2>
 

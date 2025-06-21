@@ -3,11 +3,16 @@
 
 {% block extra_title %}| {{ plant.name }}{% endblock %}
 
-{% block content %}
 <!-- UK Delivery Banner -->
+{% block delivery_banner %}
 <div class="uk-banner bg-warning text-center py-2">
     <p class="mb-0 fw-semibold text-dark"><i class="fa-solid fa-truck"></i> UK Only Delivery</p>
 </div>
+{% endblock %}
+
+{% block extra_css %}
+
+{% block content %}
 <div class="container mt-5">
     <div class="row">
         <!-- Plant Image -->
