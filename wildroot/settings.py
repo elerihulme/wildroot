@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = os.environ.get("DEBUG") == "True"
 
 ALLOWED_HOSTS = [
-    '.herokuapp.com',
+    'wildroot-d2d4c0901fc0.herokuapp.com',
     '127.0.0.1',
 ]
 
