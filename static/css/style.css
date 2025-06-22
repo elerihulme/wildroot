@@ -76,6 +76,12 @@ footer {
     cursor: pointer;
 }
 
+.filter-card {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    background-color: #fff;
+}
+
 /*------------------------------------------------------------------------ Product Detail -------------- */
 .product-detail-img {
     height: 600px;
