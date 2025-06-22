@@ -2,6 +2,7 @@ from django.views.generic import ListView
 from django.shortcuts import render, get_object_or_404
 from .models import ShopPlant, PlantCategory
 from django.contrib import messages
+from urllib.parse import urlencode
 
 class ProductList(ListView):
     """ View to list all plants with filtering and sorting options. """
@@ -62,4 +63,9 @@ class ProductList(ListView):
 def product_detail(request, pk):
     """ View to display detailed information about a specific plant. """
     plant = get_object_or_404(ShopPlant, pk=pk)
-    return render(request, 'products/product_detail.html', {'plant': plant})
+    querystring = request.GET.urlencode()
+    context = {
+        'plant': plant,
+        'querystring': querystring,
+    }
+    return render(request, 'products/product_detail.html', context)

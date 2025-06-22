@@ -11,6 +11,9 @@
 {% endblock %}
 
 {% block content %}
+<a href="{% url 'products' %}?{{ querystring }}" class="btn btn-outline-secondary m-4">
+    <i class="fa-solid fa-arrow-left"></i> Back to Products
+</a>
 <div class="container mt-5">
     <div class="row">
         <!-- Plant Image -->

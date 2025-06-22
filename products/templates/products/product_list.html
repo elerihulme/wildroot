@@ -129,7 +129,7 @@
                         </div>
 
                         <!-- Invisible stretched link -->
-                        <a href="{% url 'product_detail' plant.pk %}" class="stretched-link" aria-label="Link to {{ plant.name }} details"></a>
+                        <a href="{% url 'product_detail' plant.pk %}?{{ querystring }}" class="stretched-link" aria-label="Link to {{ plant.name }} details"></a>
                     </div>
                 </div>
             </div>
