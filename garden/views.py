@@ -35,10 +35,12 @@ def plant_detail(request, pk):
 @login_required
 def add_plant(request):
     """ Handle the addition of a new plant to the user's garden. """
+    # If the request is a POST, process the form submission
     if request.method == 'POST':
         form = UserPlantForm(request.POST, request.FILES)
         photo_form = UserPlantPhotoForm(request.POST, request.FILES)
 
+        # Validate both forms
         if form.is_valid() and photo_form.is_valid():
             user_plant = form.save(commit=False)
             user_plant.user = request.user
@@ -54,6 +56,8 @@ def add_plant(request):
             return redirect('garden')
         else:
             messages.error(request, "There was an error adding your plant. Please check the form and try again.")
+    
+    # If the request is not a POST, initialize empty forms
     else:
         form = UserPlantForm()
         photo_form = UserPlantPhotoForm()
@@ -73,14 +77,17 @@ def edit_plant(request, plant_id):
     plant = get_object_or_404(UserPlant, id=plant_id, user=request.user)
     photos = plant.photos.order_by('timestamp')
 
+    # If the request is a POST, process the form submission
     if request.method == 'POST':
         form = UserPlantForm(request.POST, instance=plant)
         photo_form = UserPlantPhotoForm(request.POST, request.FILES)
 
-        if form.is_valid():
+        # Validate both forms
+        if form.is_valid() and photo_form.is_valid():
             form.save()
 
-            if photo_form.is_valid() and photo_form.cleaned_data.get('image'):
+            # Save photo only if an image is provided
+            if photo_form.cleaned_data.get('image'):
                 photo = photo_form.save(commit=False)
                 photo.user_plant = plant
                 photo.save()
@@ -91,6 +98,7 @@ def edit_plant(request, plant_id):
         else:
             messages.error(request, "There was an error updating the plant.")
 
+    # If the request is not a POST, initialize the form with existing plant data
     else:
         form = UserPlantForm(instance=plant)
         photo_form = UserPlantPhotoForm()

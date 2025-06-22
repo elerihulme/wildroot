@@ -12,6 +12,7 @@ def profile(request):
 
     profile = get_object_or_404(UserProfile, user=request.user)
 
+    # If the request is a POST, process the form submission
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profile)
         if form.is_valid():
@@ -20,8 +21,11 @@ def profile(request):
         else:
             messages.error(request, 'Update failed. Please ensure the form is valid.')
 
-    form = UserProfileForm(instance=profile)
+    # If the request is not a POST, initialize the form with the user's profile data
+    else:
+        form = UserProfileForm(instance=profile)
     
+    # Retrieve the user's orders
     orders = profile.orders.all()
 
     template = 'profiles/profile.html'

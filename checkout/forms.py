@@ -17,6 +17,7 @@ class OrderForm(forms.ModelForm):
         )
 
     def __init__(self, *args, **kwargs):
+        """ Initialize the OrderForm with custom behavior. """
         super().__init__(*args, **kwargs)
 
         # Set country to UK only

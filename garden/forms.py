@@ -13,11 +13,19 @@ class UserPlantForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        """
+        Initialize the form and apply Bootstrap styling to all form fields.
+        """
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
 
     def clean_last_watered(self):
+        """
+        Validator to ensure the 'last_watered' field does not contain
+        a future datetime value.
+        """
+
         last_watered = self.cleaned_data.get('last_watered')
         if last_watered and last_watered > timezone.now():
             raise forms.ValidationError(
@@ -32,19 +40,30 @@ class UserPlantPhotoForm(forms.ModelForm):
         fields = ['image', 'image_alt', 'caption']
 
     def __init__(self, *args, **kwargs):
+        """
+        Initialize the form with Bootstrap styling, make caption and image_alt
+        optional by default, and rename the image_alt field label for user clarity.
+        """
         super().__init__(*args, **kwargs)
 
-        # Set optional by default
+        # Mark caption and image_alt as not required at the HTML form level.
         self.fields['caption'].required = False
         self.fields['image_alt'].required = False
 
+        # Apply Bootstrap styling to all form fields.
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
 
+        # Rename the image_alt field label for clarity.
         self.fields['image_alt'].label = "Description"
 
 
     def clean(self):
+        """
+        Ensure that if an image is uploaded, both a caption and alt text are also provided.
+        If no image is uploaded, caption and alt text are not required.
+        """
+        
         cleaned_data = super().clean()
         image = cleaned_data.get('image')
         caption = cleaned_data.get('caption')

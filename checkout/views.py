@@ -23,8 +23,11 @@ import json
 def cache_checkout_data(request):
     """ Cache checkout data to be used later in the checkout process. """
     try:
+        # Extract the payment intent ID from the client secret
         pid = request.POST.get('client_secret').split('_secret')[0]
+        # Set the Stripe API key
         stripe.api_key = settings.STRIPE_SECRET_KEY
+        # Modify the payment intent with metadata
         stripe.PaymentIntent.modify(pid, metadata={
             'bag': json.dumps(request.session.get('bag', {})),
             'save_info': request.POST.get('save_info'),
@@ -42,6 +45,7 @@ def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
+    # If post request, process the form data
     if request.method == 'POST':
         bag = request.session.get('bag', {})
 
@@ -76,6 +80,8 @@ def checkout(request):
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
             messages.error(request, 'There was an error with your form. Please check your information.')
+
+    # If not a POST request, prepare the checkout page
     else:
         bag = request.session.get('bag', {})
         if not bag:
@@ -92,6 +98,7 @@ def checkout(request):
             currency='gbp',
         )
 
+        # If the user is authenticated, pre-fill the order form with their profile data
         if request.user.is_authenticated:
             try:
                 profile = UserProfile.objects.get(user=request.user)
@@ -123,13 +130,13 @@ def checkout_success(request, order_number):
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
 
+    # If the user is authenticated, associate the order with their profile
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
-        # Attach the user's profile to the order
         order.user = profile
         order.save()
 
-        # Save the user's info
+        # Save the user's delivery info
         if save_info:
             profile_data = {
                 'default_phone_number': order.phone_number,
@@ -147,6 +154,7 @@ def checkout_success(request, order_number):
         Your order number is {order_number}. A confirmation email \
         will be sent to {order.email}.')
     
+    # Send order confirmation email
     subject = f"Order Confirmation – {order.order_number}"
     from_email = settings.DEFAULT_FROM_EMAIL
     to_email = [order.email]
@@ -162,6 +170,7 @@ def checkout_success(request, order_number):
     email.attach_alternative(html_body, "text/html")
     email.send()
 
+    # Clear the bag from the session
     if 'bag' in request.session:
         del request.session['bag']
 

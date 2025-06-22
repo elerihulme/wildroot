@@ -10,6 +10,7 @@ class ProductList(ListView):
     context_object_name = 'plants'
     paginate_by = 12
 
+    # Override the get_queryset method to apply filters and sorting
     def get_queryset(self):
         queryset = super().get_queryset()
 
@@ -44,13 +45,17 @@ class ProductList(ListView):
 
         return queryset
 
+
     def get_context_data(self, **kwargs):
         """ Add additional context data for the template. """
         context = super().get_context_data(**kwargs)
+        # Add categories to the context
         context['categories'] = PlantCategory.objects.all()
+        # Add the current filters to the context, exluding pagination
         querystring = self.request.GET.copy()
         if 'page' in querystring:
             querystring.pop('page')
+        # Add the current querystring to the context for filtering and sorting links
         context['querystring'] = querystring.urlencode()
         return context
 
