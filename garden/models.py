@@ -9,9 +9,14 @@ from django.utils import timezone
 class UserPlant(models.Model):
     """
     Model to represent a user's plant in their personal garden.
-    Each user can have multiple plants, and each plant can have multiple photos.
+    Each user can have multiple plants,
+    and each plant can have multiple photos.
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_plants')
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user_plants'
+    )
     plant_species = models.CharField(max_length=100)
     nickname = models.CharField(max_length=100)
     date_added = models.DateTimeField(auto_now_add=True)
@@ -20,7 +25,7 @@ class UserPlant(models.Model):
 
     def __str__(self):
         return f"{self.nickname} ({self.plant_species})"
-    
+
     def save(self, *args, **kwargs):
         """
         Override save method to ensure last_watered is not in the future.
@@ -40,16 +45,28 @@ class UserPlant(models.Model):
         return static('images/placeholder.png')
 
     def get_all_photos(self):
-        """ Return all photos associated with this plant, ordered by timestamp. """
+        """
+        Return all photos associated with this plant, ordered by timestamp.
+        """
         return self.photos.order_by('timestamp')
+
 
 class UserPlantPhoto(models.Model):
     """
     Model to represent a photo of a user's plant.
     Each photo is associated with a specific UserPlant.
     """
-    user_plant = models.ForeignKey(UserPlant, on_delete=models.CASCADE, related_name='photos')
-    image = CloudinaryField('user_plant_image', folder='user_plant_photos', blank=True, null=True)
+    user_plant = models.ForeignKey(
+        UserPlant,
+        on_delete=models.CASCADE,
+        related_name='photos'
+    )
+    image = CloudinaryField(
+        'user_plant_image',
+        folder='user_plant_photos',
+        blank=True,
+        null=True
+    )
     caption = models.CharField(max_length=255, blank=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     image_alt = models.CharField(max_length=255, blank=False)

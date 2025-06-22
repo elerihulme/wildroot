@@ -1,12 +1,16 @@
 from django import forms
 from .models import UserProfile
 
+
 class UserProfileForm(forms.ModelForm):
-    """ Form for updating the user's default delivery information stored in their profile. """
+    """
+    Form for updating the user's default delivery information
+    stored in their profile.
+    """
     class Meta:
         model = UserProfile
         exclude = ('user', 'default_country')
-    
+
     def __init__(self, *args, **kwargs):
         """
         Customize form initialization:

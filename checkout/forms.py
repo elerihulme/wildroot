@@ -1,8 +1,11 @@
 from django import forms
 from .models import Order
 
+
 class OrderForm(forms.ModelForm):
-    """ Form to collect and validate delivery and contact details for an order. """
+    """
+    Form to collect and validate delivery and contact details for an order.
+    """
     class Meta:
         model = Order
         fields = (
@@ -34,9 +37,15 @@ class OrderForm(forms.ModelForm):
 
         # Add HTML5 regex pattern to match server-side postcode validator
         self.fields['postcode'].widget.attrs['pattern'] = (
-            r"(GIR ?0AA|[A-PR-UWYZ][0-9][0-9]? ?[0-9][ABD-HJLNP-UW-Z]{2}|"
+            r"(GIR ?0AA|"
+            r"[A-PR-UWYZ][0-9][0-9]? ?[0-9][ABD-HJLNP-UW-Z]{2}|"
             r"[A-PR-UWYZ][A-HK-Y][0-9][0-9]? ?[0-9][ABD-HJLNP-UW-Z]{2}|"
             r"[A-PR-UWYZ][0-9][A-HJKSTUW]? ?[0-9][ABD-HJLNP-UW-Z]{2}|"
-            r"[A-PR-UWYZ][A-HK-Y][0-9][ABEHMNPRVWXY]? ?[0-9][ABD-HJLNP-UW-Z]{2})"
+            r"[A-PR-UWYZ][A-HK-Y][0-9]"
+            r"[ABEHMNPRVWXY]? ?"
+            r"[0-9][ABD-HJLNP-UW-Z]{2})"
         )
-        self.fields['postcode'].widget.attrs['title'] = "Enter a valid UK postcode"
+
+        self.fields['postcode'].widget.attrs[
+            'title'
+        ] = "Enter a valid UK postcode"

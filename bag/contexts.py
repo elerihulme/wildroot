@@ -1,6 +1,7 @@
 from decimal import Decimal
 from products.models import ShopPlant
 
+
 def bag_contents(request):
     """
     Make the bag available in all templates
@@ -12,7 +13,8 @@ def bag_contents(request):
 
     # Iterate through the bag items and calculate totals
     for item_id, quantity in list(bag.items()):
-        # Attempt to get the plant object, if it doesn't exist, remove it from the bag
+        # Try to get the plant object, if it doesn't exist,
+        # remove it from the bag
         try:
             plant = ShopPlant.objects.get(id=item_id)
         except ShopPlant.DoesNotExist:

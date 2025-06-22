@@ -4,6 +4,7 @@ from .models import ShopPlant, PlantCategory
 from django.contrib import messages
 from urllib.parse import urlencode
 
+
 class ProductList(ListView):
     """ View to list all plants with filtering and sorting options. """
     model = ShopPlant
@@ -21,7 +22,7 @@ class ProductList(ListView):
         difficulty = self.request.GET.get('difficulty')
         pet_friendly = self.request.GET.get('pet_friendly')
         air_purifying = self.request.GET.get('air_purifying')
-        shade_tolerant = self.request.GET.get('shade_tolerant') 
+        shade_tolerant = self.request.GET.get('shade_tolerant')
         sort_by = self.request.GET.get('sort')
 
         # Apply filters
@@ -30,13 +31,17 @@ class ProductList(ListView):
         if category:
             queryset = queryset.filter(category__name__iexact=category)
         if difficulty:
-            queryset = queryset.filter(category__typical_caring_difficulty=difficulty)
+            queryset = queryset.filter(
+                category__typical_caring_difficulty=difficulty
+            )
         if pet_friendly == 'true':
             queryset = queryset.filter(pet_friendly=True)
         if air_purifying == 'true':
             queryset = queryset.filter(air_purifying=True)
         if shade_tolerant == 'true':
-            queryset = queryset.filter(category__typical_light_requirements='low')
+            queryset = queryset.filter(
+                category__typical_light_requirements='low'
+            )
 
         # Sorting
         if sort_by == 'price_low':
@@ -45,7 +50,6 @@ class ProductList(ListView):
             queryset = queryset.order_by('-price')
 
         return queryset
-
 
     def get_context_data(self, **kwargs):
         """ Add additional context data for the template. """
@@ -56,9 +60,10 @@ class ProductList(ListView):
         querystring = self.request.GET.copy()
         if 'page' in querystring:
             querystring.pop('page')
-        # Add the current querystring to the context for filtering and sorting links
+        # Add the current querystring to the context
         context['querystring'] = querystring.urlencode()
         return context
+
 
 def product_detail(request, pk):
     """ View to display detailed information about a specific plant. """

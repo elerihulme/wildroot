@@ -7,7 +7,15 @@ from profiles.models import UserProfile
 
 # UK Postcode Validator
 uk_postcode_validator = RegexValidator(
-    regex=r"^(GIR ?0AA|[A-PR-UWYZ][0-9][0-9]? ?[0-9][ABD-HJLNP-UW-Z]{2}|[A-PR-UWYZ][A-HK-Y][0-9][0-9]? ?[0-9][ABD-HJLNP-UW-Z]{2}|[A-PR-UWYZ][0-9][A-HJKSTUW]? ?[0-9][ABD-HJLNP-UW-Z]{2}|[A-PR-UWYZ][A-HK-Y][0-9][ABEHMNPRVWXY]? ?[0-9][ABD-HJLNP-UW-Z]{2})$",
+    regex=(
+        r"^(GIR ?0AA|"
+        r"[A-PR-UWYZ][0-9][0-9]? ?[0-9][ABD-HJLNP-UW-Z]{2}|"
+        r"[A-PR-UWYZ][A-HK-Y][0-9][0-9]? ?[0-9][ABD-HJLNP-UW-Z]{2}|"
+        r"[A-PR-UWYZ][0-9][A-HJKSTUW]? ?[0-9][ABD-HJLNP-UW-Z]{2}|"
+        r"[A-PR-UWYZ][A-HK-Y][0-9]"
+        r"[ABEHMNPRVWXY]? ?"
+        r"[0-9][ABD-HJLNP-UW-Z]{2})$"
+    ),
     message="Enter a valid UK postcode."
 )
 
@@ -16,10 +24,17 @@ COUNTRY_CHOICES = [
     ('GB', 'United Kingdom'),
 ]
 
+
 class Order(models.Model):
     """ Order model to store order details and manage order items. """
     order_number = models.CharField(max_length=32, null=False, editable=False)
-    user = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='orders')
+    user = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='orders'
+    )
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
@@ -40,24 +55,48 @@ class Order(models.Model):
         blank=False
     )
     date = models.DateTimeField(auto_now_add=True)
-    delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
-    order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
-    grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
-    stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
+    delivery_cost = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        null=False,
+        default=0
+    )
+    order_total = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=False,
+        default=0
+    )
+    grand_total = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=False,
+        default=0
+    )
+    stripe_pid = models.CharField(
+        max_length=254,
+        null=False,
+        blank=False,
+        default=''
+    )
 
     def _generate_order_number(self):
         """ Generate a random, unique order number using UUID """
         return uuid.uuid4().hex.upper()
-    
+
     def update_total(self):
         """" Update grand total each time an item is added or removed """""
-        self.order_total = sum(item.plant.price * item.quantity for item in self.items.all())
+        self.order_total = sum(
+            item.plant.price * item.quantity for item in self.items.all()
+        )
         self.delivery_cost = 5
         self.grand_total = self.order_total + self.delivery_cost
         self.save()
 
     def save(self, *args, **kwargs):
-        """ Override save to set the order number if it hasn't been set already. """
+        """
+        Override save to set the order number if it hasn't been set already.
+        """
         if not self.order_number:
             self.order_number = self._generate_order_number()
         super().save(*args, **kwargs)
@@ -67,14 +106,36 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    """ Model to represent an item in an order. Each item is linked to a specific order and plant. """
-    order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='items')
-    plant = models.ForeignKey(ShopPlant, null=False, blank=False, on_delete=models.CASCADE)
+    """
+    Model to represent an item in an order.
+    Each item is linked to a specific order and plant.
+    """
+    order = models.ForeignKey(
+        Order,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        related_name='items'
+    )
+    plant = models.ForeignKey(
+        ShopPlant,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE
+    )
     quantity = models.IntegerField(null=False, blank=False, default=1)
-    item_total = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+    item_total = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        null=False,
+        blank=False,
+        editable=False
+    )
 
     def save(self, *args, **kwargs):
-        """ Override save to set item total based on plant price and quantity. """
+        """
+        Override save to set item total based on plant price and quantity.
+        """
         self.item_total = self.plant.price * self.quantity
         super().save(*args, **kwargs)
 

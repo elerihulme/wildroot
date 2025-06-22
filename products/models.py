@@ -56,14 +56,18 @@ class ShopPlant(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
     sku = models.CharField(max_length=50, blank=True)
-    image = CloudinaryField('shop_plant_image', folder='shop_plant_images', blank=True, null=True)
+    image = CloudinaryField(
+        'shop_plant_image',
+        folder='shop_plant_images',
+        blank=True,
+        null=True
+    )
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image_alt = models.CharField(max_length=255, blank=True)
     environment = models.CharField(
         max_length=10, choices=ENVIRONMENTS, default='indoor')
     pet_friendly = models.BooleanField(default=False)
     air_purifying = models.BooleanField(default=False)
-
 
     def get_image_url(self):
         """

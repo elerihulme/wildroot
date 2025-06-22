@@ -2,6 +2,7 @@ from django import forms
 from .models import UserPlant, UserPlantPhoto
 from django.utils import timezone
 
+
 class UserPlantForm(forms.ModelForm):
     """ Form to collect or update user plant details. """
 
@@ -9,7 +10,9 @@ class UserPlantForm(forms.ModelForm):
         model = UserPlant
         fields = ['plant_species', 'nickname', 'last_watered', 'notes']
         widgets = {
-            'last_watered': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
+            'last_watered': forms.DateTimeInput(
+                attrs={'type': 'datetime-local'}
+            ),
         }
 
     def __init__(self, *args, **kwargs):
@@ -33,6 +36,7 @@ class UserPlantForm(forms.ModelForm):
             )
         return last_watered
 
+
 class UserPlantPhotoForm(forms.ModelForm):
     """ Form to upload user plant photo. """
     class Meta:
@@ -41,8 +45,9 @@ class UserPlantPhotoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         """
-        Initialize the form with Bootstrap styling, make caption and image_alt
-        optional by default, and rename the image_alt field label for user clarity.
+        Initialize the form with Bootstrap styling,
+        make caption and image_alt optional by default,
+        and rename the image_alt field label for user clarity.
         """
         super().__init__(*args, **kwargs)
 
@@ -57,13 +62,13 @@ class UserPlantPhotoForm(forms.ModelForm):
         # Rename the image_alt field label for clarity.
         self.fields['image_alt'].label = "Description"
 
-
     def clean(self):
         """
-        Ensure that if an image is uploaded, both a caption and alt text are also provided.
+        Ensure that if an image is uploaded,
+        both a caption and alt text are also provided.
         If no image is uploaded, caption and alt text are not required.
         """
-        
+
         cleaned_data = super().clean()
         image = cleaned_data.get('image')
         caption = cleaned_data.get('caption')
@@ -72,8 +77,14 @@ class UserPlantPhotoForm(forms.ModelForm):
         # If image is provided, caption and alt are required
         if image:
             if not caption:
-                self.add_error('caption', 'Please add a caption for the photo.')
+                self.add_error(
+                    'caption',
+                    'Please add a caption for the photo.'
+                )
             if not image_alt:
-                self.add_error('image_alt', 'Please add alt text for the photo.')
+                self.add_error(
+                    'image_alt',
+                    'Please add alt text for the photo.'
+                )
 
         return cleaned_data

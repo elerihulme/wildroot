@@ -3,9 +3,11 @@ from django.http import HttpResponse
 from django.contrib import messages
 from products.models import ShopPlant
 
+
 def view_bag(request):
     """ Renders the shopping bag page """
     return render(request, 'bag/bag.html')
+
 
 def add_to_bag(request, item_id):
     """
@@ -20,7 +22,10 @@ def add_to_bag(request, item_id):
     if item_id in bag:
         # If it exists, update the quantity
         bag[item_id] += quantity
-        messages.success(request, f'Updated {plant.name} quantity to {bag[item_id]} in your bag.')
+        messages.success(
+            request,
+            f'Updated {plant.name} quantity to {bag[item_id]} in your bag.'
+        )
     else:
         # If it does not exist, add it to the bag
         bag[item_id] = quantity
@@ -29,6 +34,7 @@ def add_to_bag(request, item_id):
     # Save the updated bag back to the session
     request.session['bag'] = bag
     return redirect(redirect_url)
+
 
 def adjust_bag(request, item_id):
     """
@@ -50,6 +56,7 @@ def adjust_bag(request, item_id):
     # Save the updated bag back to the session
     request.session['bag'] = bag
     return redirect(reverse('view_bag'))
+
 
 def remove_from_bag(request, item_id):
     """

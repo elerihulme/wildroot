@@ -35,7 +35,11 @@ def cache_checkout_data(request):
         })
         return HttpResponse(status=200)
     except Exception as e:
-        messages.error(request, 'Sorry, your payment cannot be processed right now. Please try again later.')
+        messages.error(
+            request,
+            'Sorry, your payment cannot be processed right now. '
+            'Please try again later.'
+        )
         return HttpResponse(content=e, status=400)
 
 
@@ -77,17 +81,29 @@ def checkout(request):
                 )
 
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(
+                reverse(
+                    'checkout_success',
+                    args=[order.order_number]
+                )
+            )
         else:
-            messages.error(request, 'There was an error with your form. Please check your information.')
+            messages.error(
+                request,
+                'There was an error with your form. '
+                'Please check your information.'
+            )
 
     # If not a POST request, prepare the checkout page
     else:
         bag = request.session.get('bag', {})
         if not bag:
-            messages.error(request, "There's nothing in your bag at the moment.")
+            messages.error(
+                request,
+                "There's nothing in your bag at the moment."
+            )
             return redirect(reverse('products'))
-        
+
         current_bag = bag_contents(request)
         total = current_bag['grand_total']
         stripe_total = round(total * 100)
@@ -98,7 +114,8 @@ def checkout(request):
             currency='gbp',
         )
 
-        # If the user is authenticated, pre-fill the order form with their profile data
+        # If the user is authenticated,
+        # pre-fill the order form with their profile data
         if request.user.is_authenticated:
             try:
                 profile = UserProfile.objects.get(user=request.user)
@@ -153,7 +170,7 @@ def checkout_success(request, order_number):
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation email \
         will be sent to {order.email}.')
-    
+
     # Send order confirmation email
     subject = f"Order Confirmation – {order.order_number}"
     from_email = settings.DEFAULT_FROM_EMAIL

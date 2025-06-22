@@ -1,10 +1,10 @@
 from django.shortcuts import render, get_object_or_404
-
 from .models import UserProfile
 from .forms import UserProfileForm
 from checkout.models import Order
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
 
 @login_required
 def profile(request):
@@ -19,12 +19,16 @@ def profile(request):
             form.save()
             messages.success(request, 'Profile updated successfully!')
         else:
-            messages.error(request, 'Update failed. Please ensure the form is valid.')
+            messages.error(
+                request,
+                'Update failed. Please ensure the form is valid.'
+            )
 
-    # If the request is not a POST, initialize the form with the user's profile data
+    # If the request is not a POST,
+    # initialize the form with the user's profile data
     else:
         form = UserProfileForm(instance=profile)
-    
+
     # Retrieve the user's orders
     orders = profile.orders.all()
 
@@ -34,7 +38,7 @@ def profile(request):
         'orders': orders,
         'on_profile_page': True,
     }
-    
+
     return render(request, template, context)
 
 

@@ -5,6 +5,7 @@ from django.contrib import messages
 from .models import UserPlant, UserPlantPhoto
 from .forms import UserPlantForm, UserPlantPhotoForm
 
+
 def garden_list(request):
     """
     Display the list of plants in the authenticated user's garden.
@@ -12,12 +13,15 @@ def garden_list(request):
     """
     user_plants = []
     if request.user.is_authenticated:
-        user_plants = UserPlant.objects.filter(user=request.user).prefetch_related('photos').order_by('-date_added')
+        user_plants = UserPlant.objects.filter(
+            user=request.user).prefetch_related(
+                'photos').order_by('-date_added')
 
     context = {
         'user_plants': user_plants,
     }
     return render(request, 'garden/garden_list.html', context)
+
 
 @login_required
 def plant_detail(request, pk):
@@ -31,6 +35,7 @@ def plant_detail(request, pk):
         'plant': plant,
         'photos': photos
     })
+
 
 @login_required
 def add_plant(request):
@@ -52,11 +57,18 @@ def add_plant(request):
                 photo.user_plant = user_plant
                 photo.save()
 
-            messages.success(request, f"{user_plant.nickname} was added to your garden.")
+            messages.success(
+                request,
+                f"{user_plant.nickname} was added to your garden."
+            )
             return redirect('garden')
         else:
-            messages.error(request, "There was an error adding your plant. Please check the form and try again.")
-    
+            messages.error(
+                request,
+                "There was an error adding your plant. "
+                "Please check the form and try again."
+            )
+
     # If the request is not a POST, initialize empty forms
     else:
         form = UserPlantForm()
@@ -92,13 +104,17 @@ def edit_plant(request, plant_id):
                 photo.user_plant = plant
                 photo.save()
                 messages.success(request, "Photo added successfully.")
-            
-            messages.success(request, f"{plant.nickname} updated successfully.")
+
+            messages.success(
+                request,
+                f"{plant.nickname} updated successfully."
+            )
             return redirect('plant_detail', pk=plant.id)
         else:
             messages.error(request, "There was an error updating the plant.")
 
-    # If the request is not a POST, initialize the form with existing plant data
+    # If the request is not a POST,
+    # initialize the form with existing plant data
     else:
         form = UserPlantForm(instance=plant)
         photo_form = UserPlantPhotoForm()
@@ -111,15 +127,22 @@ def edit_plant(request, plant_id):
         'editing': True
     })
 
+
 @login_required
 @require_POST
 def delete_photo(request, photo_id):
-    """ Handle the deletion of a specific photo associated with a user's plant. """
-    photo = get_object_or_404(UserPlantPhoto, id=photo_id, user_plant__user=request.user)
+    """
+    Handle the deletion of a specific photo associated with a user's plant.
+    """
+    photo = get_object_or_404(
+        UserPlantPhoto,
+        id=photo_id, user_plant__user=request.user
+    )
     plant = photo.user_plant
     photo.delete()
     messages.success(request, "Photo deleted successfully.")
     return redirect('edit_plant', plant_id=plant.id)
+
 
 @login_required
 @require_POST
@@ -127,5 +150,8 @@ def delete_plant(request, plant_id):
     """ Handle the deletion of a user's plant from their garden. """
     plant = get_object_or_404(UserPlant, id=plant_id, user=request.user)
     plant.delete()
-    messages.success(request, f"{plant.nickname} has been removed from your garden.")
+    messages.success(
+        request,
+        f"{plant.nickname} has been removed from your garden."
+    )
     return redirect('garden')
