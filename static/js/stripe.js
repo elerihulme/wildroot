@@ -1,8 +1,17 @@
+/**
+ * Retrieve Stripe public key and client secret from hidden elements on the page.
+ * Initialize the Stripe card element and handle form submission with secure payment intent.
+ */
+
+// Get Stripe public key and client secret from rendered DOM elements
 var stripe_public_key = $("#id_stripe_public_key").text().slice(1, -1);
 var clientSecret = $("#id_client_secret").text().slice(1, -1);
+// Populate hidden input field for client secret
 document.getElementById("client_secret_input").value = clientSecret;
+// Initialise Stripe
 var stripe = Stripe(stripe_public_key);
 var elements = stripe.elements();
+// Define styling for card input fields
 var style = {
     base: {
         color: "#000",
@@ -18,10 +27,13 @@ var style = {
         iconColor: "#dc3545",
     },
 };
+// Create and mount the Stripe card element
 var card = elements.create("card", { style: style });
 card.mount("#card-element");
 
-// Handle realtime validation errors on the card element
+/**
+ * Handle real-time validation errors from the Stripe card element.
+ */
 card.addEventListener("change", function (event) {
     var errorDiv = document.getElementById("card-errors");
     if (event.error) {
@@ -37,20 +49,25 @@ card.addEventListener("change", function (event) {
     }
 });
 
-// Handle form submit
+// Get the form element
 var form = document.getElementById("payment-form");
-
+/**
+ * Handle form submission by sending card and billing details to Stripe.
+ * If payment is successful, the form is submitted. Otherwise, show the error.
+ */
 form.addEventListener("submit", function (ev) {
     ev.preventDefault();
+    // Disable card input and submit button to prevent multiple submissions
     card.update({ disabled: true });
     $("#submit-button").attr("disabled", true);
     $("#payment-form").fadeToggle(100);
     $("#payment-page").addClass("d-none");
     $("#loading-overlay").removeClass("d-none");
 
+    // Get checkbox state and CSRF token
     var saveInfo = Boolean($("#id-save-info").attr("checked"));
-    // From using {% csrf_token %} in the form
     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+    // Prepare data to be cached before confirming payment
     var postData = {
         csrfmiddlewaretoken: csrfToken,
         client_secret: clientSecret,
@@ -58,6 +75,9 @@ form.addEventListener("submit", function (ev) {
     };
     var url = "/checkout/cache_checkout_data/";
 
+    /**
+     * Send checkout data to cache view and then confirm card payment with Stripe.
+     */
     $.post(url, postData)
         .done(function () {
             stripe
@@ -91,6 +111,7 @@ form.addEventListener("submit", function (ev) {
                 })
                 .then(function (result) {
                     if (result.error) {
+                        // Display error message to user
                         var errorDiv = document.getElementById("card-errors");
                         var html = `
                     <span class="icon" role="alert">
@@ -98,12 +119,14 @@ form.addEventListener("submit", function (ev) {
                     </span>
                     <span>${result.error.message}</span>`;
                         $(errorDiv).html(html);
+                        // Re-enable form and card input
                         $("#loading-overlay").addClass("d-none");
                         $("#payment-page").removeClass("d-none");
                         $("#payment-form").fadeToggle(100);
                         card.update({ disabled: false });
                         $("#submit-button").attr("disabled", false);
                     } else {
+                        // Payment succeeded — submit the form
                         if (result.paymentIntent.status === "succeeded") {
                             form.submit();
                         }
@@ -111,7 +134,7 @@ form.addEventListener("submit", function (ev) {
                 });
         })
         .fail(function () {
-            // just reload the page, the error will be in django messages
+            // On error, reload the page so Django messages can display the issue
             location.reload();
         });
 });
