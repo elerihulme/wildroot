@@ -79,17 +79,17 @@
 
 **Solved bugs:**
 
-1. I was getting an error message when I tried to test the JsonResponse response on Password change.
+1. When submitting the checkout form when invalid post code entered, error 500 was recieved on form submission.
 
-_Solution:_
+_Solution:_ addition of front end post code validation for the checkout form.
+
+2. When adding or editing a plant in the users garden
+
+_Solution:_ addition of front end post code validation for the checkout form.
 
 **Unsolved bugs:**
 
 1.
-
-_Temporary Solution:_
-
-_Future Solution:_
 
 ## Validation
 
