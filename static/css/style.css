@@ -108,12 +108,12 @@ footer {
 }
 
 #goTopBtn:hover {
-    background-color: #256c1e;
+    background-color: #315c2b;
 }
 
 /*------------------------------------------------------------------------ Bag --------------------------- */
 .bag-table th {
-    background-color: #eaf4e0;
+    background-color: #fff;
     color: #315c2b;
 }
 
