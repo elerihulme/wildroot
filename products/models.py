@@ -51,7 +51,7 @@ class ShopPlant(models.Model):
 
     category = models.ForeignKey(
         PlantCategory, null=True, blank=True, on_delete=models.SET_NULL)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, blank=False)
     botanical_name = models.CharField(max_length=100, blank=True)
     description = models.TextField()
     price = models.DecimalField(max_digits=6, decimal_places=2)

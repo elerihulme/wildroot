@@ -76,28 +76,6 @@ Wild Root is an e-commerce platform for buying indoor and outdoor plants. It aim
 
 ---
 
-## Business Model
-
-Wild Root generates revenue by selling a curated selection of plants online. Customers can browse the catalog, add items to the shopping bag, and pay securely via Stripe. Customers must set up profiles to checkout, which allows storage of delivery info for faster checkouts, fostering loyalty and repeat sales.
-
-### A Persona Summary of the customer
-
-### A persona summary of the store personnel
-
-### Strategy Trade-Off
-
-Wild Root prioritizes a streamlined, user-friendly shopping experience over extensive customization options. By keeping the interface simple, customers can discover and purchase plants quickly, while the business manages operations efficiently. This trade-off lets the team focus resources on reliable fulfillment and customer support rather than complex feature development.
-
----
-
-## Web Marketing
-
-Facebook
-
-Mock-up page
-
----
-
 ## Future Development
 
 | Issue ID                                              | User Story                                                                                                                      |
@@ -271,7 +249,7 @@ COUNTRY_CHOICES = [
 | Name           | Database Key   | Field Type      | Validation                                                            |
 | -------------- | -------------- | --------------- | --------------------------------------------------------------------- |
 | category       | category       | ForeignKey      | PlantCategory, null=True, blank=True, on_delete=models.SET_NULL       |
-| name           | name           | CharField       | max_length=100                                                        |
+| name           | name           | CharField       | max_length=100, blank=False                                           |
 | botanical_name | botanical_name | CharField       | max_length=100, blank=True                                            |
 | description    | description    | TextField       | -                                                                     |
 | price          | price          | DecimalField    | max_digits=6, decimal_places=2                                        |
