@@ -155,7 +155,7 @@ The main font used for the rest of the site is Nunito, as this is clear and easy
 
 -   Images were downloaded from the websites listed in the **Credits section**. [Content and Images](#content-and-images)
 
--   Icons from [font awesome](https://fontawesome.com/) were used as icons are really good for the user experience to help them understand text and functions quickly.
+-   Icons from [font awesome](https://fontawesome.com/) were used as icons are really good for the user experience to help them understand text and functionality quickly.
 
 ### Wireframes
 
@@ -165,7 +165,11 @@ The main font used for the rest of the site is Nunito, as this is clear and easy
 
 ## Agile Methodology
 
+-   Development followed Agile practices using GitHub Issues and Projects.
+
 ### GitHub Project Management
+
+-   [GitHub Project Kanban Board](documentation/kanban_board.png)
 
 ---
 

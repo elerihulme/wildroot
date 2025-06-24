@@ -494,7 +494,7 @@ Helps reassure user that payment was processed and confirmation sent
 
 ### Order Info Section
 
-[Order Info Section](documentation/features/order_info.png)
+![Order Info Section](documentation/features/order_info.png)
 
 Clearly lists:
 
